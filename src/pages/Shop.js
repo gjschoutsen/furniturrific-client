@@ -4,6 +4,9 @@ import { Card, Button } from "react-bootstrap";
 import "./css/Shop.css";
 
 export default function Shop(props) {
+
+  
+
   return (
     <div>
       <div className="shop-container">

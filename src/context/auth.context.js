@@ -22,27 +22,24 @@ function AuthProviderWrapper(props) {
           )
           .then((response) => {
             const user = response.data;
-            console.log("inside .then ",response.data)
-            console.log("inside then is admin", isAdmin)
             setIsLoggedIn(true);
-            setIsLoading(false);
             setUser(user);
             if (user.role === "admin"){
-              console.log("--------->>>>>>>>>>>")
                 setIsAdmin(true)
-            }      
+            }
+            setIsLoading(false);
           })
           .catch((error) => {
             setIsLoggedIn(false);
-            setIsLoading(false);
             setUser(null);
             setIsAdmin(false);        
+            setIsLoading(false);
           });      
         } else {
             setIsLoggedIn(false);
-            setIsLoading(false);
             setUser(null);
             setIsAdmin(false);      
+            setIsLoading(false);
         }   
       }
      

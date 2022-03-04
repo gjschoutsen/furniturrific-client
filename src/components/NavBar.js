@@ -6,7 +6,7 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 export default function NavBar() {
 
   const { isLoggedIn, user, isAdmin, logOutUser } = useContext(AuthContext);
-  console.log("inside Navbar", isAdmin)
+  
   return (
     <div>
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -19,7 +19,7 @@ export default function NavBar() {
                 {/* <Nav.Link href="#pricing">SALE!</Nav.Link> */}
               </Nav>
               <Nav>
-              {isAdmin && isLoggedIn && (<Nav.Link href="/create-product">Create Product</Nav.Link>)}               
+              {isAdmin && (<Nav.Link href="/create-product">Create Product</Nav.Link>)}               
                 <Nav.Link href="/our-story">Our Story</Nav.Link>
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/cart">Cart</Nav.Link>
