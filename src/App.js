@@ -14,6 +14,9 @@ import UserProfile from "./pages/UserProfile";
 import About from "./pages/About";
 import CreateProduct from "./pages/CreateProduct";
 import EditProduct from "./pages/EditProduct";
+import IsPrivate from "./components/IsPrivate";
+import IsAdmin from "./components/IsAdmin";
+
 
 function App() {
   const [ products, setProducts ] = useState([]);
@@ -42,10 +45,10 @@ function App() {
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/products/:productId" element={<ProductDetails products={products} fetch={fetchProducts}/>}></Route>
             <Route path="/cart" element={<ShoppingCart />}></Route>
-            <Route path="/user" element={<UserProfile />}></Route>
+            <Route path="/user" element={ <IsPrivate> <UserProfile /> </IsPrivate> }></Route>
             <Route path="/our-story" element={<About />}></Route>
-            <Route path="/create-product" element={<CreateProduct />}></Route>
-        <Route path="/edit-product/productId" element={<EditProduct />}></Route>
+            <Route path="/create-product" element={ <IsAdmin> <CreateProduct /> </IsAdmin> }></Route>
+        <Route path="/edit-product/productId" element={ <IsAdmin> <EditProduct /> </IsAdmin> }></Route>
           </Routes>
 
       <Footer />

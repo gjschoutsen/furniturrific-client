@@ -12,13 +12,62 @@ function AuthProviderWrapper(props) {
 
     const storeToken = token => localStorage.setItem('authToken', token); 
 
+    const authenticateUser = () => {
+        const storedToken = localStorage.getItem('authToken');
+        
+        if (storedToken) {
+          axios.get(
+            `${API}/auth/verify`, 
+            { headers: { Authorization: `Bearer ${storedToken}`} }
+          )
+          .then((response) => {
+            const user = response.data;
+            console.log("inside .then ",response.data)
+            console.log("inside then is admin", isAdmin)
+            setIsLoggedIn(true);
+            setIsLoading(false);
+            setUser(user);
+            if (user.role === "admin"){
+              console.log("--------->>>>>>>>>>>")
+                setIsAdmin(true)
+            }      
+          })
+          .catch((error) => {
+            setIsLoggedIn(false);
+            setIsLoading(false);
+            setUser(null);
+            setIsAdmin(false);        
+          });      
+        } else {
+            setIsLoggedIn(false);
+            setIsLoading(false);
+            setUser(null);
+            setIsAdmin(false);      
+        }   
+      }
+     
+      const removeToken = () => {
+          localStorage.removeItem('authToken')
+      };
+
+      const logOutUser = () => {
+          removeToken();
+          authenticateUser();
+      }
+      
+      useEffect(() => {
+        authenticateUser();
+      }, []);
+
     return (
         <AuthContext.Provider value={{ 
             isLoggedIn, 
             isLoading, 
             user, 
             isAdmin, 
-            storeToken, 
+            storeToken,
+            authenticateUser,
+            logOutUser, 
             }}>
             {props.children}
         </AuthContext.Provider>

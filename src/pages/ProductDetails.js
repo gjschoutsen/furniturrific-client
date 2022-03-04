@@ -13,7 +13,10 @@ export default function ProductDetails(props) {
   const API = process.env.REACT_APP_API_URL;
 
   const deleteProduct = () => {
-    Axios.delete(`${API}/products/${productId}`)
+    const storedToken = localStorage.getItem("authToken");
+    Axios.delete(`${API}/products/${productId}`, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
       .then(() => {
         props.fetch();
         navigate("/shop");
@@ -31,13 +34,13 @@ export default function ProductDetails(props) {
           <p>{details.brand}</p>
           <p>{details.description}</p>
           <div>
-            <NavLink to={`/edit-product/${details._id}`}>
-              Edit this product
-            </NavLink>
-          </div>
-          <div>
             {isLoggedIn && isAdmin && (
               <>
+                <div>
+                  <NavLink to={`/edit-product/${details._id}`}>
+                    Edit this product
+                  </NavLink>
+                </div>
                 <Button onClick={deleteProduct} variant="outline-danger">
                   Delete this product
                 </Button>{" "}

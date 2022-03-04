@@ -17,7 +17,8 @@ export default function Shop(props) {
                 <Card.Body>
                   <Card.Title>{e.name}</Card.Title>
                   <Card.Text>{e.description}</Card.Text>
-                  <Button onClick={()=>{}} variant="primary">Go somewhere</Button>
+                  <Card.Text>{e.price}</Card.Text>
+                  <Button onClick={()=>{}} variant="primary">Add to cart</Button>
                 </Card.Body>
               </Card>
             </div>
