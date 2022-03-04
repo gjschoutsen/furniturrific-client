@@ -1,11 +1,14 @@
-import React from "react";
+import React, {useContext} from "react";
+import {AuthContext} from '../context/auth.context';
 import "./css/NavBar.css";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 export default function NavBar() {
+
+  const { isLoggedIn, user, isAdmin } = useContext(AuthContext);
+
   return (
     <div>
-      
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
           <Container>
             <Navbar.Brand href="/">logo</Navbar.Brand>
@@ -16,15 +19,23 @@ export default function NavBar() {
                 {/* <Nav.Link href="#pricing">SALE!</Nav.Link> */}
               </Nav>
               <Nav>
-                <Nav.Link href="/create-product">Create Product</Nav.Link>
+              {isAdmin && isLoggedIn && (<Nav.Link href="/create-product">Create Product</Nav.Link>)}               
                 <Nav.Link href="/our-story">Our Story</Nav.Link>
                 <Nav.Link href="/">Home</Nav.Link>
                 <Nav.Link href="/cart">Cart</Nav.Link>
                 <NavDropdown title="User" id="collasible-nav-dropdown">
-                  <NavDropdown.Item href="/user">Profile</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="/signup">Sign up</NavDropdown.Item>
-                  <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                 {isLoggedIn && (
+                   <>
+                      <NavDropdown.Item href="/user">Profile</NavDropdown.Item>
+                      <NavDropdown.Divider />
+                    </>
+                  )} 
+                  {!isLoggedIn && (
+                  <>
+                    <NavDropdown.Item href="/signup">Sign up</NavDropdown.Item>
+                    <NavDropdown.Item href="/login">Login</NavDropdown.Item>
+                  </>
+                  )}
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
