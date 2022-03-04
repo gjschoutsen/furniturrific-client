@@ -1,12 +1,16 @@
-import React, {useContext} from "react";
+import React, {useContext, useState} from "react";
 import {AuthContext} from '../context/auth.context';
+import {CartContext} from '../context/shopping.cart.context';
 import "./css/NavBar.css";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-export default function NavBar() {
+export default function NavBar(props) {
 
   const { isLoggedIn, user, isAdmin, logOutUser } = useContext(AuthContext);
-  
+  const {cart} = useContext(CartContext);
+  const cartString = localStorage.getItem('cart')
+  const cartTotal = JSON.parse(cartString)|| [];
+  console.log(cartTotal)
   return (
     <div>
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -22,7 +26,7 @@ export default function NavBar() {
               {isAdmin && (<Nav.Link href="/create-product">Create Product</Nav.Link>)}               
                 <Nav.Link href="/our-story">Our Story</Nav.Link>
                 <Nav.Link href="/">Home</Nav.Link>
-                <Nav.Link href="/cart">Cart</Nav.Link>
+                <Nav.Link href="/cart">Cart {cartTotal.length}</Nav.Link>
                 <NavDropdown title= {user ? user.username : "User"} id="collasible-nav-dropdown">
                  {isLoggedIn && (
                    <>

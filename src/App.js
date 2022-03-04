@@ -35,12 +35,13 @@ function App() {
     fetchProducts();
   },[]);
 
+
   return (
     <div className="App">
       <Navbar />
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/shop" element={<Shop products={products}/>}></Route>
+            <Route path="/shop" element={<Shop products={products} />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/products/:productId" element={<ProductDetails products={products} fetch={fetchProducts}/>}></Route>

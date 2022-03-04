@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
+import {CartContext} from '../context/shopping.cart.context';
 import "./css/Shop.css";
 
 export default function Shop(props) {
 
-  
+  const { addToCart } = useContext(CartContext);
 
   return (
     <div>
@@ -21,7 +22,7 @@ export default function Shop(props) {
                   <Card.Title>{e.name}</Card.Title>
                   <Card.Text>{e.description}</Card.Text>
                   <Card.Text>{e.price}</Card.Text>
-                  <Button onClick={()=>{}} variant="primary">Add to cart</Button>
+                  <Button onClick={() => addToCart(e) } variant="primary">Add to cart</Button>
                 </Card.Body>
               </Card>
             </div>

@@ -1,7 +1,12 @@
 import React from 'react'
 
-export default function ShoppingCart() {
+export default function ShoppingCart(props) {
+  console.log(props.cart);
   return (
-    <div>ShoppingCart</div>
+    <div>
+      <h1>Your shoppinglist here: </h1>
+
+
+    </div>
   )
 }
