@@ -5,10 +5,10 @@ import "./css/ProductDetails.css";
 import { Button } from "react-bootstrap";
 import { AuthContext } from "../context/auth.context";
 
-export default function ProductDetails(props) {
+export default function ProductDetails({fetch, products, addToCart}) {
   const { isLoggedIn, isAdmin } = useContext(AuthContext);
   const { productId } = useParams();
-  const details = props.products.find((product) => productId === product._id);
+  const details = products.find((product) => productId === product._id);
   const navigate = useNavigate();
   const API = process.env.REACT_APP_API_URL;
 
@@ -18,7 +18,7 @@ export default function ProductDetails(props) {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
       .then(() => {
-        props.fetch();
+        fetch();
         navigate("/shop");
       })
       .catch((err) => console.log("cannot delete project", err));
@@ -31,6 +31,7 @@ export default function ProductDetails(props) {
           <h1>{details.name}</h1>
           <img src={details.image} alt={details.name} />
           <h3>€ {details.price},-</h3>
+          <Button onClick={() => addToCart(details) } variant="primary">Add to cart</Button>
           <p>{details.brand}</p>
           <p>{details.description}</p>
           <div>

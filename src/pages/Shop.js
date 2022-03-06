@@ -4,14 +4,14 @@ import { Card, Button } from "react-bootstrap";
 import {CartContext} from '../context/shopping.cart.context';
 import "./css/Shop.css";
 
-export default function Shop(props) {
+export default function Shop({products, addToCart}) {
 
-  const { addToCart } = useContext(CartContext);
+  // const { addToCart } = useContext(CartContext);
 
   return (
     <div>
       <div className="shop-container">
-        {props.products.map((e) => {
+        {products.map((e) => {
           return (
             <div key={e._id}>
               <Card style={{ width: "18rem" }}>

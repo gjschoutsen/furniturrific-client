@@ -26,7 +26,6 @@ function LoginPage(props) {
  
     axios.post(`${API}/auth/login`, requestBody)
       .then((response) => {
-        console.log('JWT token', response.data.authToken );
         storeToken(response.data.authToken);
         authenticateUser(); 
         navigate('/');
