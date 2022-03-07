@@ -7,7 +7,14 @@ export default function Home() {
     <div>
       <div className="home-image">
         <img src={homeWrapper} alt="" />
+        <div className="title">
+          <h1>Furnituriffic</h1>
+        </div>
+        <div className="to-shop">
+          <h2>Furnituriffic</h2>
+        </div>
       </div>
+      
 
     </div>
   );

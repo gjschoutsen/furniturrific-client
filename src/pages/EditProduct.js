@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Axios from "axios";
 import { AuthContext } from "../context/auth.context";
@@ -12,46 +12,54 @@ export default function CreateProduct({ fetch, products }) {
   const { formInputs, removeInputs } = useContext(FormContext);
   const { getToken } = useContext(AuthContext);
   const navigate = useNavigate();
-
+  const [ defaultValues, setDefaultValues ] = useState(
+    {
+      name: project.name,
+      price: project.price,
+      productType: project.productType,
+      brand: project.brand,
+      image: project.image,
+      description: project.description
+    } 
+  );
+  
   console.log(formInputs);
+  useEffect(() => { 
+    setDefaultValues(formInputs);
+   },[])
 
   let template = {
-    title: "Add new products",
+    title: "Edit your products",
     fields: [
       {
         title: "Name:",
         type: "text",
         name: "name",
-        value: formInputs.name,
-        placeholder: project.name,
+        value: defaultValues.name,
       },
       {
         title: "Price:",
         type: "number",
         name: "price",
-        value: formInputs.price,
-        placeholder: project.price,
+        value: defaultValues.price,
       },
       {
         title: "Brand:",
         type: "text",
         name: "brand",
-        value: formInputs.brand,
-        placeholder: project.brand,
+        value: defaultValues.brand,
       },
       {
         title: "Image:",
         type: "text",
         name: "image",
-        value: formInputs.image,
-        placeholder: project.image,
+        value: defaultValues.image,
       },
       {
         title: "Description:",
         type: "text",
         name: "description",
-        value: formInputs.description,
-        placeholder: project.description,
+        value: defaultValues.description,
       },
       {
         select: true,
