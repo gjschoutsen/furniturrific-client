@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
 import { FormContext } from "../context/form.context";
+import { Button, FormControl, FormGroup, FormLabel, FormSelect } from "react-bootstrap";
+import "./css/Form.css"
 
 export default function Form({ template, onSubmit }) {
   const { title, fields } = template;
@@ -28,11 +30,12 @@ export default function Form({ template, onSubmit }) {
       };
 
       return (
-        <>
+        <div >
           {name && (
+            <FormGroup className="mb-3" controlId="exampleForm.ControlInput1">
             <div key={name}>
-              <label htmlFor={name}>{title}</label>
-              <input
+              <FormLabel htmlFor={name}>{title}</FormLabel>
+              <FormControl
                 type={type}
                 name={name}
                 value={value}
@@ -41,9 +44,12 @@ export default function Form({ template, onSubmit }) {
                 required
               />
             </div>
+            </FormGroup>
           )}
           {select && (
-            <select name={selectName} onChange={handleFormInput}>
+            <>
+            <FormLabel htmlFor={name}>Select item type here:</FormLabel>
+            <FormSelect name={selectName} onChange={handleFormInput}>
               {options.map((option) => {
                 return (
                   <option key={option.title} value={option.value}>
@@ -51,20 +57,21 @@ export default function Form({ template, onSubmit }) {
                   </option>
                 );
               })}
-            </select>
+            </FormSelect>
+          </>
           )}
-        </>
+        </div>
       );
     });
   };
 
   return (
-    <div>
+    <div className="form-container">
       <form onSubmit={onSubmit}>
-        <h4>{title}</h4>
+        <h4 className="form-title">{title}</h4>
         {renderFields(fields)}
-        <div>
-          <button type="submit">Submit</button>
+        <div className="form-button">
+          <Button type="submit">Submit</Button>
         </div>
       </form>
     </div>

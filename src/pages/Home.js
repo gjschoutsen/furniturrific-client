@@ -11,7 +11,9 @@ export default function Home() {
           <h1>Furnituriffic</h1>
         </div>
         <div className="to-shop">
-          <h2>Furnituriffic</h2>
+          <div className="h2">
+            <h2>Shop</h2>
+          </div>
         </div>
       </div>
       
