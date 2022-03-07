@@ -1,0 +1,15 @@
+.error-message {
+    background-color: aqua;
+    width: 100%;
+}
+
+.login-page {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.signup-link {
+    margin-top: 30px;
+    text-align: center;
+}

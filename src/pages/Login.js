@@ -1,71 +1,69 @@
-
 import { useState, useContext } from "react";
-import {AuthContext} from '../context/auth.context'
+import { AuthContext } from "../context/auth.context";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
-
+import "./css/Login.css";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { FormContext } from "../context/form.context";
+import Form from "../components/Form";
 const API = process.env.REACT_APP_API_URL;
 
-
 function LoginPage(props) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const { formInputs, removeInputs } = useContext(FormContext);
   const [errorMessage, setErrorMessage] = useState(undefined);
-  
   const navigate = useNavigate();
-
   const { storeToken, authenticateUser } = useContext(AuthContext);
-
-  const handleUsername = (e) => setUsername(e.target.value);
-  const handlePassword = (e) => setPassword(e.target.value);
-
+  const LoginNum = useParams();
   
-  const handleLoginSubmit = (e) => {
+  let template = {
+    title: "Login",
+    fields: [
+      {
+        title: "Username:",
+        type: "text",
+        name: "username",
+        value: formInputs.name,
+      },
+      {
+        title: "Password:",
+        type: "password",
+        name: "password",
+        value: formInputs.password,
+      },
+    ],
+  };
+
+  const onSubmit = (e) => {
     e.preventDefault();
-    const requestBody = { username, password };
- 
-    axios.post(`${API}/auth/login`, requestBody)
+
+    axios
+      .post(`${API}/auth/login`, formInputs)
       .then((response) => {
         storeToken(response.data.authToken);
-        authenticateUser(); 
-        navigate('/');
+        authenticateUser();
+        removeInputs();
+        if(LoginNum.num === "2"){
+        navigate("/");
+       }else{
+         navigate("/cart")
+       }
       })
       .catch((error) => {
-        const errorDescription = error.response.data.message;
+        const errorDescription = error.response.data.errorMessage;
+        console.log(error.response);
         setErrorMessage(errorDescription);
-      })
+      });
   };
-  
+
   return (
-    <div className="LoginPage">
-      <h1>Login</h1>
-
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input 
-          type="text"
-          name="username"
-          value={username}
-          onChange={handleUsername}
-        />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <button type="submit">Login</button>
-      </form>
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
-
-      <p>Don't have an account yet?</p>
-      <Link to={"/signup"}> Sign Up</Link>
+    <div className="login-page">
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+      <Form template={template} onSubmit={onSubmit} />
+      <div className="signup-link">
+        <p>Don't have an account yet?</p>
+        <Link to={"/signup"}> Sign Up</Link>
+      </div>
     </div>
-  )
+  );
 }
 
 export default LoginPage;
-

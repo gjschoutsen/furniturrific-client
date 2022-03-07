@@ -38,7 +38,7 @@ export default function NavBar({cartItems}) {
                   {!isLoggedIn && (
                   <>
                     <NavDropdown.Item as={Link} to="/signup">Sign up</NavDropdown.Item>
-                    <NavDropdown.Item as={Link} to="/login">Login</NavDropdown.Item>
+                    <NavDropdown.Item as={Link} to="/login/2">Login</NavDropdown.Item>
                   </>
                   )}
                 </NavDropdown>

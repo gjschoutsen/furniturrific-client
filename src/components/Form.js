@@ -32,7 +32,7 @@ export default function Form({ template, onSubmit }) {
       return (
         <div >
           {name && (
-            <FormGroup className="mb-3" controlId="exampleForm.ControlInput1">
+            <FormGroup className="mb-3" >
             <div key={name}>
               <FormLabel htmlFor={name}>{title}</FormLabel>
               <FormControl
@@ -68,7 +68,9 @@ export default function Form({ template, onSubmit }) {
   return (
     <div className="form-container">
       <form onSubmit={onSubmit}>
-        <h4 className="form-title">{title}</h4>
+      <div>
+          <h4 className="form-title">{title}</h4>
+        </div>
         {renderFields(fields)}
         <div className="form-button">
           <Button type="submit">Submit</Button>
