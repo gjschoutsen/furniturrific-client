@@ -29,7 +29,7 @@ export default function Form({ template, onSubmit }) {
                 value={value}
                 onChange={handleFormInput}
                 placeholder={placeholder}
-                // required
+                required
               />
             </div>
           )}
@@ -44,7 +44,7 @@ export default function Form({ template, onSubmit }) {
       );
     });
   };
-
+  
   return (
     <div>
       <form onSubmit={onSubmit}>
