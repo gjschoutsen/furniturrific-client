@@ -52,6 +52,10 @@ function AuthProviderWrapper(props) {
           authenticateUser();
       }
       
+      const getToken = () => {
+        return localStorage.getItem('authToken')
+      }
+
       useEffect(() => {
         authenticateUser();
       }, []);
@@ -64,7 +68,8 @@ function AuthProviderWrapper(props) {
             isAdmin, 
             storeToken,
             authenticateUser,
-            logOutUser, 
+            logOutUser,
+            getToken 
             }}>
             {props.children}
         </AuthContext.Provider>

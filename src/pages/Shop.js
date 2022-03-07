@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
-import {CartContext} from '../context/shopping.cart.context';
 import "./css/Shop.css";
 
 export default function Shop({products, addToCart}) {

@@ -118,7 +118,7 @@ function App() {
           element={
             <IsAdmin>
               {" "}
-              <CreateProduct />{" "}
+              <CreateProduct fetch={fetchProducts}/>{" "}
             </IsAdmin>
           }
         ></Route>

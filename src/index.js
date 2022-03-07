@@ -6,15 +6,15 @@ import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router } from "react-router-dom";
 import {AuthProviderWrapper} from "./context/auth.context";
-import {ShoppingCartWrapper,} from "./context/shopping.cart.context";
+import {FormWrapper,} from "./context/form.context";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
       <AuthProviderWrapper>
-        <ShoppingCartWrapper>
+        <FormWrapper>
           <App />
-        </ShoppingCartWrapper>
+        </FormWrapper>
       </AuthProviderWrapper>
     </Router>
   </React.StrictMode>,
