@@ -28,7 +28,7 @@ function LoginPage(props) {
       .then((response) => {
         storeToken(response.data.authToken);
         authenticateUser(); 
-        navigate('/cart');
+        navigate('/');
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
