@@ -1,6 +1,9 @@
 import React, {useContext, useState} from "react";
 import {Link} from 'react-router-dom'
 import {AuthContext} from '../context/auth.context';
+import cart from "../images/cart.png"
+import home from "../images/home.png"
+import logo from "../images/logo.png"
 import "./css/NavBar.css";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
@@ -15,7 +18,7 @@ export default function NavBar({cartItems}) {
     <div>
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
           <Container>
-            <Navbar.Brand as={Link} to="/">logo</Navbar.Brand>
+            <Navbar.Brand as={Link} to="/"><img className="nav-logo" src={logo} alt="cart" /></Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
               <Nav className="me-auto">
@@ -26,7 +29,7 @@ export default function NavBar({cartItems}) {
               {isAdmin && (<Nav.Link as={Link} to="/create-product">Create Product</Nav.Link>)}               
                 <Nav.Link as={Link} to="/our-story">Our Story</Nav.Link>
                 <Nav.Link as={Link} to="/">Home</Nav.Link>
-                <Nav.Link as={Link} to="/cart">Cart {amountOfCartItems}</Nav.Link>
+                <Nav.Link as={Link} to="/cart"><img className="nav-image" src={cart} alt="cart" /> {amountOfCartItems}</Nav.Link>
                 <NavDropdown title= {user ? user.username : "User"} id="collasible-nav-dropdown">
                  {isLoggedIn && (
                    <>

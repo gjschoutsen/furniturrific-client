@@ -1,5 +1,6 @@
 import React from "react";
 import "./css/Home.css";
+import {NavLink} from 'react-router-dom';
 import homeWrapper from "../images/home-wrapper.jpg";
 
 export default function Home() {
@@ -10,11 +11,16 @@ export default function Home() {
         <div className="title">
           <h1>Furnituriffic</h1>
         </div>
+        <NavLink to="/shop">
         <div className="to-shop">
-          <div className="h2">
+            <div>
             <h2>Shop</h2>
-          </div>
+            </div>
+            <div>
+            <h2>now</h2>
+            </div>
         </div>
+        </NavLink>
       </div>
       
 

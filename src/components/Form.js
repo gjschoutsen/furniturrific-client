@@ -7,6 +7,7 @@ export default function Form({ template, onSubmit }) {
   const { title, fields } = template;
 
   const [formInputs, setFormInputs] = useState({});
+  const [renderTextarea,setRenderTextarea]= useState("")
   const { getFormInputs } = useContext(FormContext);
 
   const renderFields = (fields) => {
@@ -20,6 +21,8 @@ export default function Form({ template, onSubmit }) {
         selectName,
         options,
         placeholder,
+        as,
+        rows,
       } = field;
 
       let handleFormInput = (e) => {
@@ -30,12 +33,14 @@ export default function Form({ template, onSubmit }) {
       };
 
       return (
-        <div >
+        <div  >
           {name && (
             <FormGroup className="mb-3" >
             <div key={name}>
               <FormLabel htmlFor={name}>{title}</FormLabel>
-              <FormControl
+              <FormControl 
+                as= {as} 
+                rows={rows}
                 type={type}
                 name={name}
                 value={value}
@@ -69,11 +74,13 @@ export default function Form({ template, onSubmit }) {
     <div className="form-container">
       <form onSubmit={onSubmit}>
       <div>
+        <div className="form-tile">
           <h4 className="form-title">{title}</h4>
-        </div>
         {renderFields(fields)}
+        </div>
+        </div>
         <div className="form-button">
-          <Button type="submit">Submit</Button>
+          <Button type="submit" variant="outline-warning">Submit</Button>
         </div>
       </form>
     </div>

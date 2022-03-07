@@ -1,0 +1,19 @@
+
+.footer-container {
+    bottom: 0px;
+    
+}
+
+.footer {
+    height: 200px;
+    background-color: rgb(36, 36, 36);
+    color: white;
+    clear: both;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.footer div p {
+    margin: 0;
+}

@@ -13,7 +13,7 @@ export default function CreateProduct({ fetch }) {
   console.log(formInputs);
 
   let template = {
-    title: "Add new products",
+    title: "Create new products",
     fields: [
       {
         title: "Name:",
@@ -44,6 +44,8 @@ export default function CreateProduct({ fetch }) {
         type: "text",
         name: "description",
         value: formInputs.description,
+        as: "textarea",
+        rows: 4
       },
       {
         select: true,

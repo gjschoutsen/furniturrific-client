@@ -1,5 +1,60 @@
 .shop-container {
+   
+}
+
+.shop-image {
+    width: 50%;
+    height:500px;
+    margin: 0;
+    padding: 0;
+}
+
+.shop-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 0;
+    margin: 0;
+    margin-top: 40px;
+}
+
+.shop-map {
+    margin-left: 80px;
+    margin-top: 40px;
+    margin-right: 80px;
     display: flex;
     flex-wrap: wrap;
+    justify-content:space-around;
     gap: 40px;
 }
+
+.shop-header {
+    background-color: aliceblue;
+    display: flex;
+    align-items: center;
+    justify-content:space-around;
+    border-bottom: solid rgb(230, 220, 175) 1px;
+    padding-bottom: 40px;
+}
+
+.text-box {
+    text-align: right;
+    color: rgb(247, 218, 125);
+    width: 20%;
+    margin-right: 0%;    
+}
+
+.cart {
+    box-shadow: rgba(250, 190, 78, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.shop-button {
+    all: unset;
+    border-bottom: 1px solid; 
+    transition: all .2s ease-in-out;
+}
+.shop-button:hover {
+    color: rgb(255, 189, 89);
+    transform: scale(1.1);
+}
+

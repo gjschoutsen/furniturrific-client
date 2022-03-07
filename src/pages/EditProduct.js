@@ -60,6 +60,8 @@ export default function CreateProduct({ fetch, products }) {
         type: "text",
         name: "description",
         value: defaultValues.description,
+        as: "textarea",
+        rows: 4
       },
       {
         select: true,
