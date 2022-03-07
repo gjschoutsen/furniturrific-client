@@ -9,7 +9,7 @@ export default function Form({ template, onSubmit }) {
 
   const renderFields = (fields) => {
     return fields.map((field) => {
-      const { title, type, name, value, select, selectName, options } = field;
+      const { title, type, name, value, select, selectName, options, placeholder } = field;
 
       let handleFormInput = (e) => {
         const copyInputs = { ...formInputs };
@@ -28,6 +28,7 @@ export default function Form({ template, onSubmit }) {
                 name={name}
                 value={value}
                 onChange={handleFormInput}
+                placeholder={placeholder}
                 // required
               />
             </div>
@@ -35,8 +36,7 @@ export default function Form({ template, onSubmit }) {
           {select && (
             <select name={selectName} onChange={handleFormInput}>
               {options.map((option) => {
-                
-                return <option value={option.value}>{option.title}</option>
+                return <option value={option.value}>{option.title}</option>;
               })}
             </select>
           )}

@@ -123,11 +123,11 @@ function App() {
           }
         ></Route>
         <Route
-          path="/edit-product/productId"
+          path="/edit-product/:productId"
           element={
             <IsAdmin>
               {" "}
-              <EditProduct />{" "}
+              <EditProduct products={products} fetch={fetchProducts}/>{" "}
             </IsAdmin>
           }
         ></Route>
