@@ -39,40 +39,46 @@ function App() {
   const addToCart = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
     if (productExists) {
-      setCartItems(
-        cartItems.map((item) => {
-          return item._id === product._id
-            ? { ...productExists, quantity: productExists.quantity + 1 }
-            : item;
-        })
-      );
+      const newCart = cartItems.map((item) => {
+        return item._id === product._id
+          ? { ...productExists, quantity: productExists.quantity + 1 }
+          : item;
+      });
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      setCartItems(newCart);
     } else {
-      setCartItems([...cartItems, { ...product, quantity: 1 }]);
+      const newCart = [...cartItems, { ...product, quantity: 1 }];
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      setCartItems(newCart);
     }
   };
 
   const removeAllCartItems = () => {
     setCartItems([]);
+    localStorage.removeItem("cart");
   };
 
   const reduceProduct = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
     if (productExists.quitantity === 1) {
-      setCartItems(cartItems.filter((item) => item._id !== product.id));
+      const newCart = cartItems.filter((item) => item._id !== product.id);
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      setCartItems(newCart);
     } else {
-      setCartItems(
-        cartItems.map((item) => {
-          return item.id === product.id && item.quantity >= 2
-            ? { ...productExists, quantity: productExists.quantity - 1 }
-            : item;
-        })
-      );
+      const newCart = cartItems.map((item) => {
+        return item.id === product.id && item.quantity >= 2
+          ? { ...productExists, quantity: productExists.quantity - 1 }
+          : item;
+      });
+      localStorage.setItem("cart", JSON.stringify(newCart));
+      setCartItems(newCart);
     }
   };
 
   const removeProduct = (product) => {
-    const updatedCart = cartItems.filter((item) => item._id !== product._id);
-    setCartItems(updatedCart);
+    const newCart = cartItems.filter((item) => item._id !== product._id);
+    localStorage.setItem("cart", JSON.stringify(newCart));
+    setCartItems(newCart);
   };
 
   return (
@@ -83,7 +89,13 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route
             path="/shop"
-            element={<Shop products={products} addToCart={addToCart} />}
+            element={
+              <Shop
+                products={products}
+                addToCart={addToCart}
+                fetch={fetchProducts}
+              />
+            }
           ></Route>
           <Route path="/login/:num" element={<Login />}></Route>
           <Route path="/signup" element={<Signup />}></Route>
@@ -115,7 +127,7 @@ function App() {
             path="/cart/checkout"
             element={
               <IsPrivate>
-                <Checkout cartItems={cartItems}/>
+                <Checkout cartItems={cartItems} />
               </IsPrivate>
             }
           ></Route>

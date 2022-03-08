@@ -1,9 +1,15 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import Form from "../components/Form";
 import Axios from 'axios';
-
+import './css/Checkout.css'
 export default function CheckOut({ cartItems }) {
   const [ user, setUser]= useState([])
+  const [cartFromStorageState, setCartFromStorageState] = useState([]);
+
+  useEffect(() => {
+    const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
+    setCartFromStorageState(cartFromStorage);
+  }, [cartItems]);
 
   return (
     <div className="checkout-body">
@@ -28,10 +34,12 @@ export default function CheckOut({ cartItems }) {
       </div>
 
     <div className="checkout-items">
-      {cartItems.map((e) => {
+      {cartFromStorageState.map((e) => {
         return (
-          <div key={e._id}>
+          <div className="checkout-container" key={e._id}>
+            <div>
             <img src={e.image} alt="" />
+            </div>
             <div>
               <h3>{e.name}</h3>
             </div>

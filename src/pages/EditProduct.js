@@ -23,7 +23,6 @@ export default function CreateProduct({ fetch, products }) {
     } 
   );
   
-  console.log(formInputs);
   useEffect(() => { 
     setDefaultValues(formInputs);
    },[])
@@ -81,7 +80,6 @@ export default function CreateProduct({ fetch, products }) {
   const onSubmit = (e) => {
     e.preventDefault();
     const storedToken = getToken();
-    console.log(formInputs);
 
     Axios.put(`${API}/products/${project._id}`, formInputs, {
       headers: { Authorization: `Bearer ${storedToken}` },

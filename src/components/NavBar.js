@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import {useContext, useState, useEffect} from "react";
 import {Link} from 'react-router-dom'
 import {AuthContext} from '../context/auth.context';
 import cart from "../images/cart.png"
@@ -8,9 +8,14 @@ import "./css/NavBar.css";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
 export default function NavBar({cartItems}) {
-
   const { isLoggedIn, user, isAdmin, logOutUser } = useContext(AuthContext);
-  const amountOfCartItems = cartItems.reduce((quantity, item) => {
+  const [cartFromStorageState, setCartFromStorageState] = useState([]);
+  useEffect(()=>{
+    const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
+        setCartFromStorageState(cartFromStorage)
+  },[cartItems])
+
+  const amountOfCartItems = cartFromStorageState.reduce((quantity, item) => {
     return quantity + item.quantity
  },0)
   
