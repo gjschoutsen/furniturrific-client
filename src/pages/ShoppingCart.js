@@ -38,19 +38,23 @@ export default function ShoppingCart({
             </div>
           );
         })}
-
-        <h4>Total Price: {totalPrice}</h4>
-
-        <div>
-          <Nav.Link as={Link} to="/cart/checkout">
-            Checkout
-          </Nav.Link>
+        <div className="total-price">
+          <h4>Total Price: {totalPrice}</h4>
         </div>
       </div>
 
       {cartItems.length >= 1 && (
-        <button onClick={removeAllCartItems}>Empty cart</button>
+        <div className="empty-button">
+          <button onClick={removeAllCartItems}>Empty cart</button>
+        </div>
       )}
+
+      <div className="checkout-button">
+          <Nav.Link as={Link} to="/cart/checkout">
+            Checkout
+          </Nav.Link>
+        </div>
+
     </div>
   );
 }
