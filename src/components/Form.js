@@ -7,7 +7,6 @@ export default function Form({ template, onSubmit }) {
   const { title, fields } = template;
 
   const [formInputs, setFormInputs] = useState({});
-  const [renderTextarea,setRenderTextarea]= useState("")
   const { getFormInputs } = useContext(FormContext);
 
   const renderFields = (fields) => {
