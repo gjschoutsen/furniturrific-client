@@ -1,47 +1,54 @@
-import { useState} from "react";
+import { useEffect, useState} from "react";
 import { NavLink } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import shopImage from "../images/shop-image-white.jpg";
 import "./css/Shop.css";
 
-export default function Shop({ products, addToCart }) {
+export default function Shop({ products, addToCart, fetch }) {
+  const [productsArr, setProductsArr]= useState(products)
   const [ filter , setFilter] = useState(products)
 
-  const filterChairs = () => {
-    const chairs = products.filter((product) => {
-      return product.productType === "chair" 
+  const filterProducts = (productType) => {
+    
+    const result = products.filter((product) => {
+      console.log(product.productType, productType);
+      return product.productType === productType
     })
-    setFilter(chairs);
+    setFilter(result);
   }
-  const filterTables = () => {
-    const tables = products.filter((product) => {
-      return product.productType === "table" 
-    })
-    console.log(tables);
-    setFilter(tables);
-  }
-  const filterLights = () => {
-    const lights = products.filter((product) => {
-      return product.productType === "light" 
-    })
-    setFilter(lights);
-  }
-  const filterCouches = () => {
-    const couches = products.filter((product) => {
-      return product.productType === "couch" 
-    })
-    setFilter(couches);
-  }
-  const filterAccesories = () => {
-    const accessories = products.filter((product) => {
-      return product.productType === "accessories" 
-    })
-    setFilter(accessories);
-  }
-  const showAll = () => {
-    setFilter(products);
-  }
+    const showAll = () => {
+      setFilter(products);
+    }
 
+
+// useEffect(()=>{
+//   renderMap()
+// },[])
+
+const renderMap = () => {
+
+  return products.map((e) => {
+    return (
+      <div key={e._id}>
+        <div className="cart">
+          <Card border="light" style={{ width: "18rem", height: "30rem" }}>
+            <NavLink to={`/products/${e._id}`}>
+              <Card.Img variant="top" src={e.image} />
+            </NavLink>
+            <Card.Body>
+              <Card.Title>{e.name}</Card.Title>
+              <Card.Text>{e.description}</Card.Text>
+              <Card.Text>€ {e.price},-</Card.Text>
+              <Button onClick={() => addToCart(e)} variant="outline-warning">
+                Add to cart
+              </Button>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
+    );
+  })
+}
 
   return (
     <div>
@@ -50,27 +57,27 @@ export default function Shop({ products, addToCart }) {
           <div className="shop-header">
             <div className="text-box">
               <div>
-            <button onClick={filterChairs} className="shop-button">
+            <button onClick={() => filterProducts("chair")} className="shop-button">
                 <h3>Chairs</h3>
               </button>
               </div>
               <div>
-              <button onClick={filterTables} className="shop-button">
+              <button onClick={() => filterProducts("table")} className="shop-button">
                 <h3>Tables</h3>
               </button>
               </div>
               <div>
-              <button onClick={filterLights} className="shop-button">
+              <button onClick={() => filterProducts("light")} className="shop-button">
                 <h3>Lights</h3>
               </button>
               </div>
               <div>
-              <button onClick={filterCouches} className="shop-button">
+              <button onClick={() => filterProducts("couch")} className="shop-button">
                 <h3>Couches</h3>
               </button>
               </div>
               <div>
-              <button onClick={filterAccesories} className="shop-button">
+              <button onClick={() => filterProducts("accessories")} className="shop-button">
                 <h3>Accesories</h3>
               </button>
               </div>
@@ -81,31 +88,11 @@ export default function Shop({ products, addToCart }) {
               </div>
             </div>
             <div className="shop-image">
-              <img src={shopImage} alt="" />
+              <img src={shopImage} alt="Cover" />
             </div>
           </div>
           <div className="shop-map">
-            {filter.map((e) => {
-              return (
-                <div key={e._id}>
-                  <div className="cart">
-                    <Card border="light" style={{ width: "18rem", height: "30rem" }}>
-                      <NavLink to={`/products/${e._id}`}>
-                        <Card.Img variant="top" src={e.image} />
-                      </NavLink>
-                      <Card.Body>
-                        <Card.Title>{e.name}</Card.Title>
-                        <Card.Text>{e.description}</Card.Text>
-                        <Card.Text>€ {e.price},-</Card.Text>
-                        <Button onClick={() => addToCart(e)} variant="outline-warning">
-                          Add to cart
-                        </Button>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                </div>
-              );
-            })}
+            {products.length ? renderMap() : <p>Loading...</p>}
           </div>
         </div>
       </div>
