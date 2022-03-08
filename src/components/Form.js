@@ -16,6 +16,7 @@ export default function Form({ template, onSubmit }) {
         type,
         name,
         value,
+        selectValue,
         select,
         selectName,
         options,
@@ -53,7 +54,7 @@ export default function Form({ template, onSubmit }) {
           {select && (
             <>
             <FormLabel htmlFor={name}>Select item type here:</FormLabel>
-            <FormSelect name={selectName} onChange={handleFormInput}>
+            <FormSelect name={selectName} value={selectValue} onChange={handleFormInput}>
               {options.map((option) => {
                 return (
                   <option key={option.title} value={option.value}>
