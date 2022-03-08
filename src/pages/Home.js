@@ -9,7 +9,7 @@ export default function Home() {
       <div className="home-image">
         <img src={homeWrapper} alt="" />
         <div className="title">
-          <h1>Furnituriffic</h1>
+          <h1>Furniturrific</h1>
         </div>
         <NavLink to="/shop">
         <div className="to-shop">
