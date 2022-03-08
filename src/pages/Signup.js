@@ -58,7 +58,7 @@ function SignupPage(props) {
       <Form template={template} onSubmit={onSubmit} />
       <div >
         <p>Already have account?</p>
-        <Link to={"/login"}> Login</Link>
+        <Link to={"/login/1"}> Login</Link>
       </div>
     </div>
   );
