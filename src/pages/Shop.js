@@ -89,14 +89,14 @@ export default function Shop({ products, addToCart }) {
               return (
                 <div key={e._id}>
                   <div className="cart">
-                    <Card style={{ width: "18rem", height: "28rem" }}>
+                    <Card border="light" style={{ width: "18rem", height: "30rem" }}>
                       <NavLink to={`/products/${e._id}`}>
                         <Card.Img variant="top" src={e.image} />
                       </NavLink>
                       <Card.Body>
                         <Card.Title>{e.name}</Card.Title>
                         <Card.Text>{e.description}</Card.Text>
-                        <Card.Text>{e.price},-</Card.Text>
+                        <Card.Text>€ {e.price},-</Card.Text>
                         <Button onClick={() => addToCart(e)} variant="outline-warning">
                           Add to cart
                         </Button>
