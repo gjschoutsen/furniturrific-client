@@ -66,6 +66,7 @@ export default function CreateProduct({ fetch, products }) {
       {
         select: true,
         selectName: "productType",
+        selectValue: defaultValues.productType,
         options: [
           { value: "couch", title: "Couch" },
           { value: "chair", title: "Chair" },
