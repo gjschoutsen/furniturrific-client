@@ -55,7 +55,7 @@ export default function ShoppingCart({
         </div>
       </div>
 
-      {cartItems.length >= 1 && (
+      {cartFromStorageState.length >= 1 && (
         <div className="empty-button">
           <button onClick={removeAllCartItems}>Empty cart</button>
         </div>
