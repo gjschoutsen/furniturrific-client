@@ -10,12 +10,13 @@ import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 export default function NavBar({cartItems}) {
   const { isLoggedIn, user, isAdmin, logOutUser } = useContext(AuthContext);
   const [cartFromStorageState, setCartFromStorageState] = useState([]);
+  
   useEffect(()=>{
     const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
         setCartFromStorageState(cartFromStorage)
   },[cartItems])
 
-  const amountOfCartItems = cartFromStorageState.reduce((quantity, item) => {
+  const amountOfCartItems = cartFromStorageState?.reduce((quantity, item) => {
     return quantity + item.quantity
  },0)
   
