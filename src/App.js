@@ -35,6 +35,7 @@ function App() {
   }, []);
 
   const [cartItems, setCartItems] = useState([]);
+  console.log(cartItems);
 
   useEffect(() => {
     const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
@@ -82,8 +83,6 @@ function App() {
 
   const removeProduct = (product) => {
     const newCart = cartItems.filter((item) => item._id !== product._id);
-    console.log("inside remove product, product", product)
-    console.log("inside remove product, cartItems", cartItems)
     localStorage.setItem("cart", JSON.stringify(newCart));
     setCartItems(newCart);
   };
