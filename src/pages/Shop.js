@@ -4,30 +4,28 @@ import { Card, Button } from "react-bootstrap";
 import shopImage from "../images/shop-image-white.jpg";
 import "./css/Shop.css";
 
-export default function Shop({ products, addToCart, fetch }) {
-  const [productsArr, setProductsArr]= useState(products)
+export default function Shop({ products, addToCart }) {
   const [ filter , setFilter] = useState(products)
 
   const filterProducts = (productType) => {
-    
     const result = products.filter((product) => {
       console.log(product.productType, productType);
-      return product.productType === productType
-    })
+      return product.productType === productType;
+    });
     setFilter(result);
-  }
-    const showAll = () => {
+  };
+
+  const showAll = () => {
       setFilter(products);
-    }
+  }
 
-
-// useEffect(()=>{
-//   renderMap()
-// },[])
+  useEffect(()=>{
+    setFilter(products)
+  },[products])
 
 const renderMap = () => {
-
-  return products.map((e) => {
+  
+  return filter.map((e) => {
     return (
       <div key={e._id}>
         <div className="cart">
@@ -57,7 +55,7 @@ const renderMap = () => {
           <div className="shop-header">
             <div className="text-box">
               <div>
-            <button onClick={() => filterProducts("chair")} className="shop-button">
+              <button onClick={() => filterProducts("chair")} className="shop-button">
                 <h3>Chairs</h3>
               </button>
               </div>
