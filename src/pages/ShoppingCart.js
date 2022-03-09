@@ -19,9 +19,6 @@ export default function ShoppingCart({
   const totalPrice = cartFromStorageState?.reduce((price, item) => {
     return price + item.quantity * item.price;
   }, 0);
-  console.log(cartFromStorageState);
-
- 
 
   const renderItems = () => {
     return cartFromStorageState?.map((e) => {
@@ -34,10 +31,8 @@ export default function ShoppingCart({
           <button onClick={() => addToCart(e)}>+</button>
           <div>{e.quantity}</div>
           <button
-            onClick={() => {
-              reduceProduct(e);
-            }}
-          ></button>
+            onClick={() => reduceProduct(e)}
+          >-</button>
           <div>Price: {e.price}</div>
           <button onClick={() => removeProduct(e)}>x</button>
         </div>
