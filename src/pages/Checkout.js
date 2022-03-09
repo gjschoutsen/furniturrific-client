@@ -12,7 +12,7 @@ const API = process.env.REACT_APP_API_URL;
 let stripePromise;
 const getStripe = () => {
   if(!stripePromise) {
-    stripePromise = loadStripe("pk_test_51KbXg5Hn57gbgbkNFITLGVjH1AA2EopntG58Uld0RinHsO9QfjsvV4OSX0gzkEDJE0mXewMX7THNFCJeKgWljI1400Sxm53gSt");
+    stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
   }
   return stripePromise;
 }
