@@ -8,18 +8,18 @@ const API = process.env.REACT_APP_API_URL;
 
 export default function CreateProduct({ fetch, products }) {
   const { productId } = useParams();
-  const project = products.find((product) => productId === product._id);
+  const product = products.find((product) => productId === product._id);
   const { formInputs, removeInputs } = useContext(FormContext);
   const { getToken } = useContext(AuthContext);
   const navigate = useNavigate();
   const [ defaultValues, setDefaultValues ] = useState(
     {
-      name: project.name,
-      price: project.price,
-      productType: project.productType,
-      brand: project.brand,
-      image: project.image,
-      description: project.description
+      name: product.name,
+      price: product.price,
+      productType: product.productType,
+      brand: product.brand,
+      image: product.image,
+      description: product.description
     } 
   );
   
@@ -81,12 +81,12 @@ export default function CreateProduct({ fetch, products }) {
     e.preventDefault();
     const storedToken = getToken();
 
-    Axios.put(`${API}/products/${project._id}`, formInputs, {
+    Axios.put(`${API}/products/${product._id}`, formInputs, {
       headers: { Authorization: `Bearer ${storedToken}` },
     })
       .then(() => {
         fetch();
-        navigate(`/products/${project._id}`);
+        navigate(`/products/${product._id}`);
       })
       .catch((err) => console.log("Error posting product to DB", err));
   };
