@@ -51,6 +51,7 @@ function AuthProviderWrapper(props) {
       const logOutUser = () => {
           removeToken();
           authenticateUser();
+          localStorage.removeItem("cart");
       }
       
       const getToken = () => {
