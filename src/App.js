@@ -32,12 +32,11 @@ function App() {
 
   useEffect(() => {
     fetchProducts();
-    const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
-     setCartItems(cartFromStorage);
+    const cartFromStorage = JSON.parse(localStorage.getItem("cart")) ?? [];
+    setCartItems(cartFromStorage);
   }, []);
 
   const [cartItems, setCartItems] = useState([]);
-  console.log(cartItems);
 
   const addToCart = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
@@ -85,84 +84,86 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className="not-footer">
-        <Navbar cartItems={cartItems} />
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route
-            path="/shop"
-            element={
-              <Shop
-                products={products}
-                addToCart={addToCart}
-                fetch={fetchProducts}
-              />
-            }
-          ></Route>
-          <Route path="/login/:num" element={<Login />}></Route>
-          <Route path="/signup" element={<Signup />}></Route>
-          <Route
-            path="/products/:productId"
-            element={
-              <ProductDetails
-                addToCart={addToCart}
-                products={products}
-                fetch={fetchProducts}
-              />
-            }
-          ></Route>
-          <Route
-            path="/cart"
-            element={
-              <IsPrivate>
-                <ShoppingCart
-                  reduceProduct={reduceProduct}
-                  removeProduct={removeProduct}
-                  removeAllCartItems={removeAllCartItems}
-                  cartItems={cartItems}
+    <div>
+      <div className="App">
+        <div className="not-footer">
+          <Navbar cartItems={cartItems} />
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route
+              path="/shop"
+              element={
+                <Shop
+                  products={products}
                   addToCart={addToCart}
+                  fetch={fetchProducts}
                 />
-              </IsPrivate>
-            }
-          ></Route>
-          <Route
-            path="/cart/checkout"
-            element={
-              <IsPrivate>
-                <Checkout cartItems={cartItems} />
-              </IsPrivate>
-            }
-          ></Route>
-          <Route
-            path="/user"
-            element={
-              <IsPrivate>
-                {" "}
-                <UserProfile />{" "}
-              </IsPrivate>
-            }
-          ></Route>
-          <Route path="/our-story" element={<About />}></Route>
-          <Route
-            path="/create-product"
-            element={
-              <IsAdmin>
-                {" "}
-                <CreateProduct fetch={fetchProducts} />{" "}
-              </IsAdmin>
-            }
-          ></Route>
-          <Route
-            path="/edit-product/:productId"
-            element={
-              <IsAdmin>
-                {" "}
-                <EditProduct products={products} fetch={fetchProducts} />{" "}
-              </IsAdmin>
-            }
-          ></Route>
-        </Routes>
+              }
+            ></Route>
+            <Route path="/login/:num" element={<Login />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route
+              path="/products/:productId"
+              element={
+                <ProductDetails
+                  addToCart={addToCart}
+                  products={products}
+                  fetch={fetchProducts}
+                />
+              }
+            ></Route>
+            <Route
+              path="/cart"
+              element={
+                <IsPrivate>
+                  <ShoppingCart
+                    reduceProduct={reduceProduct}
+                    removeProduct={removeProduct}
+                    removeAllCartItems={removeAllCartItems}
+                    cartItems={cartItems}
+                    addToCart={addToCart}
+                  />
+                </IsPrivate>
+              }
+            ></Route>
+            <Route
+              path="/cart/checkout"
+              element={
+                <IsPrivate>
+                  <Checkout cartItems={cartItems} />
+                </IsPrivate>
+              }
+            ></Route>
+            <Route
+              path="/user"
+              element={
+                <IsPrivate>
+                  {" "}
+                  <UserProfile />{" "}
+                </IsPrivate>
+              }
+            ></Route>
+            <Route path="/our-story" element={<About />}></Route>
+            <Route
+              path="/create-product"
+              element={
+                <IsAdmin>
+                  {" "}
+                  <CreateProduct fetch={fetchProducts} />{" "}
+                </IsAdmin>
+              }
+            ></Route>
+            <Route
+              path="/edit-product/:productId"
+              element={
+                <IsAdmin>
+                  {" "}
+                  <EditProduct products={products} fetch={fetchProducts} />{" "}
+                </IsAdmin>
+              }
+            ></Route>
+          </Routes>
+        </div>
       </div>
       <div className="is-footer">
         <Footer />
