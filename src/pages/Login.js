@@ -13,7 +13,7 @@ function LoginPage(props) {
   const navigate = useNavigate();
   const { storeToken, authenticateUser } = useContext(AuthContext);
   const LoginNum = useParams();
-  
+
   let template = {
     title: "Login",
     fields: [
@@ -41,11 +41,11 @@ function LoginPage(props) {
         storeToken(response.data.authToken);
         authenticateUser();
         removeInputs();
-        if(LoginNum.num === "2"){
-        navigate("/");
-       }else{
-         navigate("/cart")
-       }
+        if (LoginNum.num === "2") {
+          navigate("/");
+        } else {
+          navigate("/cart");
+        }
       })
       .catch((error) => {
         const errorDescription = error.response.data.errorMessage;
@@ -55,12 +55,20 @@ function LoginPage(props) {
   };
 
   return (
-    <div className="login-page">
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-      <Form template={template} onSubmit={onSubmit} />
-      <div className="signup-link">
-        <p>Don't have an account yet?</p>
-        <Link to={"/signup"}> Sign Up</Link>
+    <div className="login-body">
+      <Link to={"/signup"}>
+        <div className="side-box">
+          <div className="side-box2">
+            <div className="signup-link">
+              <p>Don't have an account yet?</p>
+              Sign Up
+            </div>
+          </div>
+        </div>
+      </Link>
+      <div className="login-page">
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        <Form template={template} onSubmit={onSubmit} />
       </div>
     </div>
   );

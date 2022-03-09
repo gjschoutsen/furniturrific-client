@@ -12,20 +12,25 @@ export default function CreateProduct({ fetch, products }) {
   const { formInputs, removeInputs } = useContext(FormContext);
   const { getToken } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [ defaultValues, setDefaultValues ] = useState(
-    {
+  const [ defaultValues, setDefaultValues ] = useState({})
+    
+
+  
+  useEffect(() => { 
+    setDefaultValues(formInputs);
+   },[formInputs])
+
+   useEffect(()=>{
+    const defaultObject = {
       name: product.name,
       price: product.price,
       productType: product.productType,
       brand: product.brand,
       image: product.image,
       description: product.description
-    } 
-  );
-  
-  useEffect(() => { 
-    setDefaultValues(formInputs);
-   },[])
+    }
+    setDefaultValues(defaultObject)
+   },[product])
 
   let template = {
     title: "Edit your products",

@@ -39,6 +39,9 @@ export default function ShoppingCart({
       );
     });
   };
+
+  console.log(cartFromStorageState);
+
   return (
     <div>
       <h1>Your shoppinglist here: </h1>
@@ -56,11 +59,13 @@ export default function ShoppingCart({
         </div>
       )}
 
+      {cartFromStorageState.length && 
       <div className="checkout-button">
-        <Nav.Link as={Link} to="/cart/checkout">
+         <Nav.Link as={Link} to="/cart/checkout">
           Checkout
         </Nav.Link>
       </div>
+      }
     </div>
   );
 }

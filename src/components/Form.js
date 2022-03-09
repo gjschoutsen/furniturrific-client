@@ -11,9 +11,15 @@ import "./css/Form.css";
 
 export default function Form({ template, onSubmit }) {
   const { title, fields } = template;
-
   const [formInputs, setFormInputs] = useState({});
   const { getFormInputs } = useContext(FormContext);
+
+  let handleFormInput = (e) => {
+    const copyInputs = { ...formInputs };
+    copyInputs[e.target.name] = e.target.value;
+    getFormInputs(copyInputs);
+    setFormInputs(copyInputs);
+  };
 
   const renderFields = (fields) => {
     return fields.map((field) => {
@@ -31,13 +37,6 @@ export default function Form({ template, onSubmit }) {
         as,
         rows,
       } = field;
-
-      let handleFormInput = (e) => {
-        const copyInputs = { ...formInputs };
-        copyInputs[e.target.name] = e.target.value;
-        getFormInputs(copyInputs);
-        setFormInputs(copyInputs);
-      };
 
       return (
         <div key={name}>
@@ -88,12 +87,12 @@ export default function Form({ template, onSubmit }) {
           <div className="form-tile">
             <h4 className="form-title">{title}</h4>
             {renderFields(fields)}
-          </div>
-        </div>
         <div className="form-button">
           <Button type="submit" variant="outline-warning">
             Submit
           </Button>
+        </div>
+          </div>
         </div>
       </form>
     </div>
