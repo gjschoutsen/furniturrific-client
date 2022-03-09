@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 
 function IsAdmin( { children } ) {
   
-  const { isAdmin, isLoading, isLoggedIn } = useContext(AuthContext);
+  const { isAdmin, isLoading} = useContext(AuthContext);
 
   if (isLoading) {
     return <p>Loading ...</p>
@@ -13,9 +13,6 @@ function IsAdmin( { children } ) {
   } else {
     return <Navigate to="/" />;
   }
-
-}
-
-
+};
 
 export default IsAdmin;
