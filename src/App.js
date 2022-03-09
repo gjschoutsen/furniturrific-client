@@ -35,7 +35,7 @@ function App() {
   }, []);
 
   const [cartItems, setCartItems] = useState([]);
-  console.log(cartItems);
+  // console.log(cartItems);
 
   useEffect(() => {
     const cartFromStorage = JSON.parse(localStorage.getItem("cart"));

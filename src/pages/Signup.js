@@ -3,7 +3,7 @@
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FormContext } from "../context/form.context";
-import axios from "axios";
+import Axios from "axios";
 import "./css/Signup.css";
 import Form from "../components/Form";
 const API = process.env.REACT_APP_API_URL;
@@ -40,7 +40,7 @@ function SignupPage(props) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    axios
+    Axios
       .post(`${API}/auth/signup`, formInputs)
       .then((response) => {
         removeInputs();

@@ -39,8 +39,8 @@ export default function NavBar({cartItems}) {
                 <NavDropdown title= {user ? user.username : "User"} id="collasible-nav-dropdown">
                  {isLoggedIn && (
                    <>
-                      <NavDropdown.Item as={Link} to="/user">Profile</NavDropdown.Item>
-                      <NavDropdown.Divider />
+                      {/* <NavDropdown.Item as={Link} to="/user">Profile</NavDropdown.Item> */}
+                      {/* <NavDropdown.Divider /> */}
                       <NavDropdown.Item onClick={logOutUser}>Logout</NavDropdown.Item>
                     </>
                   )} 

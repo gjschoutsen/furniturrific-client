@@ -10,10 +10,7 @@
     display: flex;
     flex-direction: column;
     padding: 40px;
-}
-
-.checkout-container {
-
+    height: 40%;
 }
 
 .checkout-image img{
@@ -34,4 +31,11 @@
     text-align: end;
     border-top: black solid 2px;
     padding-top: 5px;
+}
+
+.render-address {
+    background-color: aqua;
+    width: 50%;
+    margin-top: 40px;
+
 }
