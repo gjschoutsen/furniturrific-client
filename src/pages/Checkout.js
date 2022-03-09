@@ -1,12 +1,21 @@
 import { useState, useEffect, useContext } from "react";
 import {Navigate} from 'react-router-dom'
 import Form from "../components/Form";
+import { loadStripe } from '@stripe/stripe-js';
 import { AuthContext } from "../context/auth.context";
 import { FormContext } from "../context/form.context";
 import Axios from "axios";
 import "./css/Checkout.css";
 import { Button } from "react-bootstrap";
 const API = process.env.REACT_APP_API_URL;
+
+let stripePromise;
+const getStripe = () => {
+  if(!stripePromise) {
+    stripePromise = loadStripe("pk_test_51KbXg5Hn57gbgbkNFITLGVjH1AA2EopntG58Uld0RinHsO9QfjsvV4OSX0gzkEDJE0mXewMX7THNFCJeKgWljI1400Sxm53gSt");
+  }
+  return stripePromise;
+}
 
 export default function CheckOut({ cartItems }) {
   const { formInputs, removeInputs } = useContext(FormContext);
@@ -16,21 +25,24 @@ export default function CheckOut({ cartItems }) {
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [render, setRender] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [ defaultValues, setDefaultValues ] = useState(
-    {
-      street: currentUser.street,
-      city: currentUser.city,
-      state: currentUser.state,
-      postalCode: currentUser.postalCode,
-      country: currentUser.country,
-    } 
-  );
-    console.log("defaultValues", defaultValues)
-    console.log(formInputs)
-  useEffect(() => { 
-    setDefaultValues(formInputs);
-   },[])
-
+  const [ defaultValues, setDefaultValues ] = useState({})
+  // Stripe payment 
+  const item = {
+    price: "price_1KbXjkHn57gbgbkNvrndDEO1",
+    quantity: 1,
+  }
+  const checkoutOptions = {
+    lineItems: [item],
+    mode: "payment",
+    successUrl: `${window.location.origin}/success`,
+    cancelUrl: `${window.location.origin}/cancel`
+  }
+  const redirectToCheckout = async () => {
+      console.log("redirect to checkout");
+      const stripe = await getStripe()
+      const { error } = await stripe.redirectToCheckout(checkoutOptions);
+      console.log("Stripe error",error)
+  }
 
   // calculate total price of products
   const totalPrice = cartFromStorageState?.reduce((price, item) => {
@@ -76,6 +88,21 @@ export default function CheckOut({ cartItems }) {
     fetchUserInfo() 
   },[])
 
+  useEffect(() => {
+    const defaultObject = {
+      street: currentUser.street,
+      city: currentUser.city,
+      state: currentUser.state,
+      postalCode: currentUser.postalCode,
+      country: currentUser.country,
+    } 
+    setDefaultValues(defaultObject)
+  },[currentUser])
+
+  useEffect(() => { 
+    setDefaultValues(formInputs);
+   },[formInputs])
+
   const renderCartItems = () => {
     return (
       <div>
@@ -95,7 +122,7 @@ export default function CheckOut({ cartItems }) {
       </div>
     );
   };
-
+  // Template to feed the form
   let template = {
     title: "Please provide your Shipping Information",
     fields: [
@@ -103,31 +130,31 @@ export default function CheckOut({ cartItems }) {
         title: "Street:",
         type: "text",
         name: "street",
-        value: defaultValues.street,
+        value: defaultValues.street
       },
       {
         title: "City:",
         type: "text",
         name: "city",
-        value: defaultValues.city,
+        value: defaultValues.city
       },
       {
         title: "State:",
         type: "text",
         name: "state",
-        value: defaultValues.state,
+        value: defaultValues.state
       },
       {
         title: "Postal Code:",
         type: "text",
         name: "postalCode",
-        value: defaultValues.postalCode,
+        value: defaultValues.postalCode
       },
       {
         title: "Country:",
         type: "text",
         name: "country",
-        value: defaultValues.country,
+        value: defaultValues.country
       },
     ],
   };
@@ -167,7 +194,7 @@ export default function CheckOut({ cartItems }) {
         <h5>Your Order</h5>
         {renderCartItems()}
         <div className="checkout-total-price">Total: €{totalPrice},-</div>
-        <button>Pay</button>
+        <button onClick={redirectToCheckout}>Pay</button>
       </div>
     </div>
   );

@@ -17,6 +17,9 @@ import CreateProduct from "./pages/CreateProduct";
 import EditProduct from "./pages/EditProduct";
 import IsPrivate from "./components/IsPrivate";
 import IsAdmin from "./components/IsAdmin";
+import "@stripe/stripe-js"
+import Success from "./pages/Success";
+import Cancel from "./pages/Cancel";
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -162,6 +165,8 @@ function App() {
                 </IsAdmin>
               }
             ></Route>
+            <Route path="/success" element={<Success />}></Route>
+            <Route path="/cancel" element={<Cancel />}></Route>
           </Routes>
         </div>
       </div>
