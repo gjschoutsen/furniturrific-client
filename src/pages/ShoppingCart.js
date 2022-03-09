@@ -12,7 +12,7 @@ export default function ShoppingCart({
   const [cartFromStorageState, setCartFromStorageState] = useState([]);
 
   useEffect(() => {
-    const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
+    const cartFromStorage = JSON.parse(localStorage.getItem("cart"))??[];
     setCartFromStorageState(cartFromStorage);
   }, [cartItems]);
 

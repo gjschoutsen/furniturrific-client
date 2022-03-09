@@ -26,9 +26,10 @@ export default function CheckOut({ cartItems }) {
     } 
   );
     console.log("defaultValues", defaultValues)
-  // useEffect(() => { 
-  //   setDefaultValues(formInputs);
-  //  },[])
+    console.log(formInputs)
+  useEffect(() => { 
+    setDefaultValues(formInputs);
+   },[])
 
 
   // calculate total price of products
@@ -37,7 +38,7 @@ export default function CheckOut({ cartItems }) {
   }, 0);
   // get cart items from storage
   useEffect(() => {
-    const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
+    const cartFromStorage = JSON.parse(localStorage.getItem("cart"))??[];
     setCartFromStorageState(cartFromStorage);
   }, [cartItems]);
   // GET user information from DB
@@ -48,7 +49,6 @@ export default function CheckOut({ cartItems }) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        console.log("inside API", response.data)
         setCurrentUser(response.data)
       })
       .catch(err => console.log("Cannot get user information from DB"))
@@ -75,10 +75,6 @@ export default function CheckOut({ cartItems }) {
   useEffect(() => { 
     fetchUserInfo() 
   },[])
-
-  // useEffect(()=>{
-  //   renderAddress();
-  // },[currentUser])
 
   const renderCartItems = () => {
     return (
@@ -144,9 +140,8 @@ export default function CheckOut({ cartItems }) {
         headers: { Authorization: `Bearer ${storedToken}` },
       })
       .then((response) => {
-        removeInputs();
         fetchUserInfo();
-      
+        setRender(false)
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -158,7 +153,6 @@ export default function CheckOut({ cartItems }) {
     setRender(true);
   }
   const renderCondition = () => {
-    console.log(currentUser);
     return currentUser && (Object.keys(currentUser).length < 13 || render === true ? renderForm() : renderAddress())  
   }
 

@@ -1,9 +1,16 @@
 body {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content:space-between;
 }
 
 .is-footer {
-    margin-top: 300px;
+   
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+.App {
+    padding-bottom: 600px;
 }
