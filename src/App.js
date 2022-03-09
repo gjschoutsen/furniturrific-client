@@ -36,6 +36,11 @@ function App() {
 
   const [cartItems, setCartItems] = useState([]);
 
+  useEffect(() => {
+    const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
+    setCartItems(cartFromStorage);
+  }, []);
+
   const addToCart = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
     if (productExists) {
@@ -77,6 +82,8 @@ function App() {
 
   const removeProduct = (product) => {
     const newCart = cartItems.filter((item) => item._id !== product._id);
+    console.log("inside remove product, product", product)
+    console.log("inside remove product, cartItems", cartItems)
     localStorage.setItem("cart", JSON.stringify(newCart));
     setCartItems(newCart);
   };
