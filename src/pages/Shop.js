@@ -3,13 +3,13 @@ import { NavLink } from "react-router-dom";
 import { Card, Button } from "react-bootstrap";
 import shopImage from "../images/shop-image-white.jpg";
 import "./css/Shop.css";
+import { computeHeadingLevel } from "@testing-library/react";
 
 export default function Shop({ products, addToCart }) {
   const [ filter , setFilter] = useState(products)
 
   const filterProducts = (productType) => {
     const result = products.filter((product) => {
-      console.log(product.productType, productType);
       return product.productType === productType;
     });
     setFilter(result);
