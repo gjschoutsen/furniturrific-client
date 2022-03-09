@@ -32,15 +32,12 @@ function App() {
 
   useEffect(() => {
     fetchProducts();
+    const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
+     setCartItems(cartFromStorage);
   }, []);
 
   const [cartItems, setCartItems] = useState([]);
-  // console.log(cartItems);
-
-  useEffect(() => {
-    const cartFromStorage = JSON.parse(localStorage.getItem("cart"));
-    setCartItems(cartFromStorage);
-  }, []);
+  console.log(cartItems);
 
   const addToCart = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
