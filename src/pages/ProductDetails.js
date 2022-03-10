@@ -68,6 +68,7 @@ export default function ProductDetails({ fetch, products, addToCart }) {
           </div>
         </>
       )}
+      <div className="footer-spacer"></div>
     </div>
   );
 }

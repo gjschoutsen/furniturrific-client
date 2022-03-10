@@ -22,6 +22,9 @@
 .spacer {
     height: 40px;
 }
+.footer-spacer {
+    height: 800px;
+}
 
 .details-name-price {
     display: flex;

@@ -13,7 +13,7 @@ export default function Succes() {
             <img src={pic} alt="chair" />
           </NavLink>
         </div>
-        <div className='spacer'>
+        <div className='spacer2'>
 
         </div>
     </div>
