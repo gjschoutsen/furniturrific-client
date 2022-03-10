@@ -1,7 +1,13 @@
 body {
+    font-family: 'Mukta', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
     display: flex;
     flex-direction: column;
     justify-content:space-between;
+}
+
+.font {
+    font-family: 'Mukta', sans-serif;
 }
 
 .is-footer {

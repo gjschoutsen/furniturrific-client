@@ -20,15 +20,11 @@ export default function NavBar({cartItems}) {
     return quantity + item.quantity
  },0)
 
-    if(number === true){
-      amountOfCartItems = 0
-    }else{
+    // if(number === true){
+    //   amountOfCartItems = 0
+    // }else{
+    // }
 
-      
-    }
-    console.log(number);
-
-  
   return (
     <div>
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">

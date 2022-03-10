@@ -40,8 +40,6 @@ export default function ShoppingCart({
     });
   };
 
-  console.log(cartFromStorageState);
-
   return (
     <div>
       <h1>Your shoppinglist here: </h1>
