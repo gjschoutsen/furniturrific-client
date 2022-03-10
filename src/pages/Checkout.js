@@ -27,18 +27,29 @@ export default function CheckOut({ cartItems }) {
   const [currentUser, setCurrentUser] = useState({});
   const [ defaultValues, setDefaultValues ] = useState({})
   const [items, setItems] = useState([])
+  
   // Stripe payment 
+  useEffect(() => { 
 
   const isBrian = cartFromStorageState?.find((e) => e.name === "Brian")
-  // const brian.quantity
+  const isPeter = cartFromStorageState?.find((e) => e.name === "Peter")
   
   console.log("");
-  const item = {
-    price: "price_1KbXjkHn57gbgbkNvrndDEO1",
-    quantity: 1,
-  }
+  const itemsArr =[
+    {
+      price: "price_1KbXjkHn57gbgbkNvrndDEO1",
+      quantity: isBrian?.quantity,
+    },
+    {
+      price: "price_1KbjfZHn57gbgbkNEz5qzI8f",
+      quantity: isPeter?.quantity
+    },
+  ]; 
+  setItems(itemsArr)
+   },[cartFromStorageState])
+  
   const checkoutOptions = {
-    lineItems: [item],
+    lineItems: items,
     mode: "payment",
     successUrl: `${window.location.origin}/success`,
     cancelUrl: `${window.location.origin}/cancel`
