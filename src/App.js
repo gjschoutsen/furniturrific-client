@@ -24,9 +24,10 @@ import Cancel from "./pages/Cancel";
 
 function App() {
   const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const {number} = useContext(AuthContext);
   const API = process.env.REACT_APP_API_URL;
-
+  
   const fetchProducts = () => {
     Axios.get(`${API}/products`)
       .then((products) => {
@@ -34,15 +35,13 @@ function App() {
       })
       .catch((err) => console.log("Error getting products from API", err));
   };
-
+  //Fetch products from DB, Fetch cart items form local storage, setCartItems
   useEffect(() => {
     fetchProducts();
     const cartFromStorage = JSON.parse(localStorage.getItem("cart")) ?? [];
     setCartItems(cartFromStorage);
   }, []);
-
-  const [cartItems, setCartItems] = useState([]);
-
+  // Check if product is in cart, if so update quantity to +1, else add property quantity and set to 1
   const addToCart = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
     if (productExists) {
@@ -65,8 +64,8 @@ function App() {
     localStorage.removeItem("cart");
   };
 
-  useEffect(() => { removeAllCartItems(); },[number])
-
+  // useEffect(() => { removeAllCartItems(); },[number])
+  // Find product in cart, if found set quantity to -1, else stays the same
   const reduceProduct = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
     if (productExists.quitantity === 1) {
@@ -83,7 +82,7 @@ function App() {
       setCartItems(newCart);
     }
   };
-
+  //Remove one product from cart
   const removeProduct = (product) => {
     const newCart = cartItems.filter((item) => item._id !== product._id);
     localStorage.setItem("cart", JSON.stringify(newCart));

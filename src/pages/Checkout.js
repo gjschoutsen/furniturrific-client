@@ -26,12 +26,13 @@ export default function CheckOut({ cartItems }) {
   const [render, setRender] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [ defaultValues, setDefaultValues ] = useState({})
+  const [items, setItems] = useState([])
   // Stripe payment 
 
   const isBrian = cartFromStorageState?.find((e) => e.name === "Brian")
   // const brian.quantity
   
-  console.log(isBrian?.length);
+  console.log("");
   const item = {
     price: "price_1KbXjkHn57gbgbkNvrndDEO1",
     quantity: 1,
@@ -88,11 +89,11 @@ export default function CheckOut({ cartItems }) {
       </div>
     );
   };
-
+  //Fetch the User information from DB
   useEffect(() => { 
     fetchUserInfo() 
   },[])
-
+  //Set previous values to the form
   useEffect(() => {
     const defaultObject = {
       street: currentUser.street,
@@ -103,7 +104,7 @@ export default function CheckOut({ cartItems }) {
     } 
     setDefaultValues(defaultObject)
   },[currentUser])
-
+  //Set updated values to the form
   useEffect(() => { 
     setDefaultValues(formInputs);
    },[formInputs])
