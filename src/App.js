@@ -63,8 +63,6 @@ function App() {
     setCartItems([]);
     localStorage.removeItem("cart");
   };
-
-  // useEffect(() => { removeAllCartItems(); },[number])
   // Find product in cart, if found set quantity to -1, else stays the same
   const reduceProduct = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
@@ -93,7 +91,7 @@ function App() {
     <div>
       <div className="App">
         <div className="not-footer">
-          <Navbar cartItems={cartItems} />
+          <Navbar cartItems={cartItems} removeAllCartItems={removeAllCartItems} />
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route

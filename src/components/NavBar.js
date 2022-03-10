@@ -7,8 +7,8 @@ import logo from "../images/logo.png";
 import "./css/NavBar.css";
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 
-export default function NavBar({ cartItems }) {
-  const { isLoggedIn, user, isAdmin, logOutUser, number } =
+export default function NavBar({ cartItems, removeAllCartItems }) {
+  const { isLoggedIn, user, isAdmin, logOutUser} =
     useContext(AuthContext);
   const [cartFromStorageState, setCartFromStorageState] = useState([]);
   // const [amountOfCartItems, setAmountOfCartItems]= useState(0)
@@ -21,6 +21,11 @@ export default function NavBar({ cartItems }) {
   let amountOfCartItems = cartFromStorageState?.reduce((quantity, item) => {
     return quantity + item.quantity;
   }, 0);
+
+  const callFunctions = () => {
+    logOutUser(); 
+    removeAllCartItems();
+  }
 
   return (
     <div>
@@ -61,7 +66,7 @@ export default function NavBar({ cartItems }) {
                   <>
                     {/* <NavDropdown.Item as={Link} to="/user">Profile</NavDropdown.Item> */}
                     {/* <NavDropdown.Divider /> */}
-                    <NavDropdown.Item onClick={logOutUser}>
+                    <NavDropdown.Item onClick={callFunctions}>
                       Logout
                     </NavDropdown.Item>
                   </>
