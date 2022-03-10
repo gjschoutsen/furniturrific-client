@@ -45,7 +45,7 @@ function LoginPage(props) {
         if (LoginNum.num === "2") {
           navigate("/");
         } else {
-          navigate("/cart");
+          navigate("/cart/1");
         }
       })
       .catch((error) => {

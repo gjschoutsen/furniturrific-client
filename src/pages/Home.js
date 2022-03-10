@@ -15,9 +15,9 @@ export default function Home() {
           <div className="to-shop">
             <div>
               <h2 className="font">Shop</h2>
-            </div>
-            <div>
-              <h2>now</h2>
+              </div>
+              <div>
+              <h2 className="font">now</h2>
             </div>
           </div>
         </NavLink>

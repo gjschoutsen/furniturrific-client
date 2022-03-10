@@ -18,9 +18,9 @@ body {
 }
 
 .App {
-    padding-bottom: 600px;
+    padding-bottom: 200px;
 }
 
 .keep-footer-down {
-    height: 400px;
+    height: 200px;
 }

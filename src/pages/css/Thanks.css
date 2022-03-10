@@ -1,0 +1,23 @@
+.thanks {
+    background-color: purple;
+    width: 100vw;
+    height: 2000px;
+    position: relative;
+}
+
+.gif {
+    position: absolute;
+    top: 500px;
+    left: 400px;
+}
+
+.pic img{
+    width: 200px;
+}
+.pic-cont {
+    position: absolute;
+    top: 200px;
+    left: 300px;
+    display: flex;
+    gap: 40px;
+}

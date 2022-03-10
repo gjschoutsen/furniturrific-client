@@ -17,14 +17,14 @@ export default function ShoppingCart({
 
   const ToastMessage = () => {
     return (
-      <ToastContainer position="middle-center">
+      <ToastContainer position="top-center">
         <Toast onClose={() => setShow(false)} show={show} delay={4000} autohide>
           <Toast.Header>
             <img src={logo} className="rounded me-2" alt="" width="40px" />
             <strong className="me-auto">Payment was cancelled</strong>
             <small className="text-muted">I'm sorry</small>
           </Toast.Header>
-          <Toast.Body variant="Dark">Please try again</Toast.Body>
+          <Toast.Body>Please try again</Toast.Body>
         </Toast>
       </ToastContainer>
     );

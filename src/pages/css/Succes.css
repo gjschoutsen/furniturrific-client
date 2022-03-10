@@ -1,0 +1,26 @@
+.succes {
+    font-family: 'Mukta', sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+.succes-box {
+    position: relative;
+    margin-top: 40px;
+    padding: 40px;
+    width: 40vw;
+    height: auto;
+    background-color: aliceblue;
+    box-shadow: rgba(250, 190, 78, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.spacer {
+    height: 600px;
+}
+.succes-box img {
+    position: absolute;
+    left: 100px;
+    bottom: 40px;
+    max-width: 60%;
+}

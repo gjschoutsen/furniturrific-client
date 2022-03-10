@@ -110,5 +110,8 @@
 
 .to-the-shop {
     padding-top: 40px;
-    
+}
+.toast-body {
+    background-color: rgb(255, 214, 79);
+    z-index: 10;
 }

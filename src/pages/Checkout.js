@@ -6,7 +6,7 @@ import { AuthContext } from "../context/auth.context";
 import { FormContext } from "../context/form.context";
 import Axios from "axios";
 import "./css/Checkout.css";
-import { Button } from "react-bootstrap";
+import { Button, Table } from "react-bootstrap";
 const API = process.env.REACT_APP_API_URL;
 
 let stripePromise;
@@ -83,48 +83,42 @@ export default function CheckOut({ cartItems }) {
   const renderAddress = () => {
     return (
       <div className="render-address">
-        <div className="address-titel">
-          <h2>Shipping Details</h2>
+        <div className="render-container">
+          <div className="address-titel">
+            <h2>Shipping Details</h2>
+          </div>
+
+          <table className="table" striped bordered hover>
+            <tbody>
+              <tr>
+                <td>Username: </td>
+                <td>{currentUser.username}</td>
+              </tr>
+              <tr>
+                <td>Street:</td>
+                <td>{currentUser.street}</td>
+              </tr>
+              <tr>
+                <td>Postal Code:</td>
+                <td>{currentUser.postalCode}</td>
+              </tr>
+              <tr>
+                <td>City:</td>
+                <td>{currentUser.city}</td>
+              </tr>
+              <tr>
+                <td>State:</td>
+                <td>{currentUser.state}</td>
+              </tr>
+              <tr>
+                <td>Country:</td>
+                <td>{currentUser.country}</td>
+              </tr>
+              <tr></tr>
+            </tbody>
+          </table>
         </div>
-        <div className="user-details">
-          <div className="text1">
-            <div>
-              <p>Username:</p>
-            </div>
-            <div>{currentUser.username}</div>
-          </div>
-          <div className="text1">
-            <div>
-              <p>Street: </p>
-            </div>
-            <div>{currentUser.street}</div>
-          </div>
-          <div className="text1">
-            <div>
-              <p>PostalCode: </p>
-            </div>
-            <div>{currentUser.postalCode}</div>
-          </div>
-          <div className="text1">
-            <div>
-              <p>City:</p>
-            </div>
-            <div> {currentUser.city}</div>
-          </div>
-          <div className="text1">
-            <div>
-              <p>State: </p>
-            </div>
-            <div>{currentUser.state}</div>
-          </div>
-          <div className="text1">
-            <div>
-              <p>Country: </p>
-            </div>
-            <div>{currentUser.country}</div>
-          </div>
-        </div>
-        <div>
+        <div className="address-button">
           <Button onClick={renderEditFormOnClick} variant="outline-info">
             Edit
           </Button>
@@ -158,12 +152,12 @@ export default function CheckOut({ cartItems }) {
         {cartFromStorageState?.map((e) => {
           return (
             <div className="checkout-container" key={e._id}>
+              <div className="quant-price">
               <div>
                 <p>{e.name}</p>
               </div>
-              <div className="quant-price">
                 <div>{e.quantity}</div>
-                <div>€ {e.price},-</div>
+                <div className="checkout-price">€ {e.price},-</div>
               </div>
             </div>
           );
@@ -228,6 +222,11 @@ export default function CheckOut({ cartItems }) {
   const renderEditFormOnClick = () => {
     setRender(true);
   };
+
+  useEffect(()=>{
+    renderCondition()
+  },[currentUser])
+
   const renderCondition = () => {
     return (
       currentUser &&
