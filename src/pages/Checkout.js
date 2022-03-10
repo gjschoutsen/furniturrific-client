@@ -27,6 +27,11 @@ export default function CheckOut({ cartItems }) {
   const [currentUser, setCurrentUser] = useState({});
   const [ defaultValues, setDefaultValues ] = useState({})
   // Stripe payment 
+
+  const isBrian = cartFromStorageState?.find((e) => e.name === "Brian")
+  // const brian.quantity
+  
+  console.log(isBrian?.length);
   const item = {
     price: "price_1KbXjkHn57gbgbkNvrndDEO1",
     quantity: 1,
