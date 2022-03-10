@@ -49,11 +49,15 @@ function AuthProviderWrapper(props) {
           localStorage.removeItem('authToken')
       };
 
+      const resetShoppingCartNr = () => {
+        return number ? setNumber(false) : setNumber(true)
+      }
+
       const logOutUser = () => {
           removeToken();
           authenticateUser();
           localStorage.removeItem("cart");
-          setNumber(true);
+          resetShoppingCartNr();
       }
       
       const getToken = () => {
@@ -74,7 +78,8 @@ function AuthProviderWrapper(props) {
             authenticateUser,
             logOutUser,
             getToken,
-            number 
+            number,
+            resetShoppingCartNr
             }}>
             {props.children}
         </AuthContext.Provider>

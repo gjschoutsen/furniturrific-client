@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import {AuthContext} from './context/auth.context';
 import Axios from "axios";
 import "./App.css";
 import Navbar from "./components/NavBar";
@@ -23,6 +24,7 @@ import Cancel from "./pages/Cancel";
 
 function App() {
   const [products, setProducts] = useState([]);
+  const {number} = useContext(AuthContext);
   const API = process.env.REACT_APP_API_URL;
 
   const fetchProducts = () => {
@@ -62,6 +64,8 @@ function App() {
     setCartItems([]);
     localStorage.removeItem("cart");
   };
+
+  useEffect(() => { removeAllCartItems(); },[number])
 
   const reduceProduct = (product) => {
     const productExists = cartItems.find((item) => item._id === product._id);
