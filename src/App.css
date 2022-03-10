@@ -20,3 +20,7 @@ body {
 .App {
     padding-bottom: 600px;
 }
+
+.keep-footer-down {
+    height: 400px;
+}

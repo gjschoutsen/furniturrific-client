@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from "react";
-import {Navigate} from 'react-router-dom'
+import { Navigate } from "react-router-dom";
 import Form from "../components/Form";
-import { loadStripe } from '@stripe/stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
 import { AuthContext } from "../context/auth.context";
 import { FormContext } from "../context/form.context";
 import Axios from "axios";
@@ -11,11 +11,11 @@ const API = process.env.REACT_APP_API_URL;
 
 let stripePromise;
 const getStripe = () => {
-  if(!stripePromise) {
+  if (!stripePromise) {
     stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY);
   }
   return stripePromise;
-}
+};
 
 export default function CheckOut({ cartItems }) {
   const { formInputs, removeInputs } = useContext(FormContext);
@@ -25,41 +25,40 @@ export default function CheckOut({ cartItems }) {
   const [errorMessage, setErrorMessage] = useState(undefined);
   const [render, setRender] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
-  const [ defaultValues, setDefaultValues ] = useState({})
-  const [items, setItems] = useState([])
-  
-  // Stripe payment 
-  useEffect(() => { 
+  const [defaultValues, setDefaultValues] = useState({});
+  const [items, setItems] = useState([]);
 
-  const isBrian = cartFromStorageState?.find((e) => e.name === "Brian")
-  const isPeter = cartFromStorageState?.find((e) => e.name === "Peter")
-  
-  console.log("");
-  const itemsArr =[
-    {
-      price: "price_1KbXjkHn57gbgbkNvrndDEO1",
-      quantity: isBrian?.quantity,
-    },
-    {
-      price: "price_1KbjfZHn57gbgbkNEz5qzI8f",
-      quantity: isPeter?.quantity
-    },
-  ]; 
-  setItems(itemsArr)
-   },[cartFromStorageState])
-  
+  // Stripe payment
+  useEffect(() => {
+    const isBrian = cartFromStorageState?.find((e) => e.name === "Brian");
+    const isPeter = cartFromStorageState?.find((e) => e.name === "Peter");
+
+    console.log("");
+    const itemsArr = [
+      {
+        price: "price_1KbXjkHn57gbgbkNvrndDEO1",
+        quantity: 1,
+      },
+      {
+        price: "price_1KbjfZHn57gbgbkNEz5qzI8f",
+        quantity: 1,
+      },
+    ];
+    setItems(itemsArr);
+  }, [cartFromStorageState]);
+
   const checkoutOptions = {
     lineItems: items,
     mode: "payment",
     successUrl: `${window.location.origin}/success`,
-    cancelUrl: `${window.location.origin}/cancel`
-  }
+    cancelUrl: `${window.location.origin}/cart/2`,
+  };
   const redirectToCheckout = async () => {
-      console.log("redirect to checkout");
-      const stripe = await getStripe()
-      const { error } = await stripe.redirectToCheckout(checkoutOptions);
-      console.log("Stripe error",error)
-  }
+    console.log("redirect to checkout");
+    const stripe = await getStripe();
+    const { error } = await stripe.redirectToCheckout(checkoutOptions);
+    console.log("Stripe error", error);
+  };
 
   // calculate total price of products
   const totalPrice = cartFromStorageState?.reduce((price, item) => {
@@ -67,43 +66,76 @@ export default function CheckOut({ cartItems }) {
   }, 0);
   // get cart items from storage
   useEffect(() => {
-    const cartFromStorage = JSON.parse(localStorage.getItem("cart"))??[];
+    const cartFromStorage = JSON.parse(localStorage.getItem("cart")) ?? [];
     setCartFromStorageState(cartFromStorage);
   }, [cartItems]);
   // GET user information from DB
   const fetchUserInfo = () => {
-    
-    Axios
-      .get(`${API}/user/${user._id}`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
+    Axios.get(`${API}/user/${user._id}`, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
       .then((response) => {
-        setCurrentUser(response.data)
+        setCurrentUser(response.data);
       })
-      .catch(err => console.log("Cannot get user information from DB"))
+      .catch((err) => console.log("Cannot get user information from DB"));
   };
   //Render the user information
   const renderAddress = () => {
     return (
       <div className="render-address">
-            <div className="user-details">
-              <div>{currentUser.username}</div>
-              <div>Street: {currentUser.street}</div>
-              <div>PostalCode: {currentUser.postalCode}</div>
-              <div>City: {currentUser.city}</div>
-              <div>State: {currentUser.state}</div>
-              <div>Country: {currentUser.country}</div>
-            </div>
+        <div className="address-titel">
+          <h2>Shipping Details</h2>
+        </div>
+        <div className="user-details">
+          <div className="text1">
             <div>
-              <Button onClick={renderEditFormOnClick} variant="outline-info">Edit</Button>
+              <p>Username:</p>
             </div>
+            <div>{currentUser.username}</div>
+          </div>
+          <div className="text1">
+            <div>
+              <p>Street: </p>
+            </div>
+            <div>{currentUser.street}</div>
+          </div>
+          <div className="text1">
+            <div>
+              <p>PostalCode: </p>
+            </div>
+            <div>{currentUser.postalCode}</div>
+          </div>
+          <div className="text1">
+            <div>
+              <p>City:</p>
+            </div>
+            <div> {currentUser.city}</div>
+          </div>
+          <div className="text1">
+            <div>
+              <p>State: </p>
+            </div>
+            <div>{currentUser.state}</div>
+          </div>
+          <div className="text1">
+            <div>
+              <p>Country: </p>
+            </div>
+            <div>{currentUser.country}</div>
+          </div>
+        </div>
+        <div>
+          <Button onClick={renderEditFormOnClick} variant="outline-info">
+            Edit
+          </Button>
+        </div>
       </div>
     );
   };
   //Fetch the User information from DB
-  useEffect(() => { 
-    fetchUserInfo() 
-  },[])
+  useEffect(() => {
+    fetchUserInfo();
+  }, []);
   //Set previous values to the form
   useEffect(() => {
     const defaultObject = {
@@ -112,13 +144,13 @@ export default function CheckOut({ cartItems }) {
       state: currentUser.state,
       postalCode: currentUser.postalCode,
       country: currentUser.country,
-    } 
-    setDefaultValues(defaultObject)
-  },[currentUser])
+    };
+    setDefaultValues(defaultObject);
+  }, [currentUser]);
   //Set updated values to the form
-  useEffect(() => { 
+  useEffect(() => {
     setDefaultValues(formInputs);
-   },[formInputs])
+  }, [formInputs]);
 
   const renderCartItems = () => {
     return (
@@ -142,36 +174,37 @@ export default function CheckOut({ cartItems }) {
   // Template to feed the form
   let template = {
     title: "Please provide your Shipping Information",
+    buttonName: "Save",
     fields: [
       {
         title: "Street:",
         type: "text",
         name: "street",
-        value: defaultValues.street
+        value: defaultValues.street,
       },
       {
         title: "City:",
         type: "text",
         name: "city",
-        value: defaultValues.city
+        value: defaultValues.city,
       },
       {
         title: "State:",
         type: "text",
         name: "state",
-        value: defaultValues.state
+        value: defaultValues.state,
       },
       {
         title: "Postal Code:",
         type: "text",
         name: "postalCode",
-        value: defaultValues.postalCode
+        value: defaultValues.postalCode,
       },
       {
         title: "Country:",
         type: "text",
         name: "country",
-        value: defaultValues.country
+        value: defaultValues.country,
       },
     ],
   };
@@ -179,13 +212,12 @@ export default function CheckOut({ cartItems }) {
   const onSubmit = (e) => {
     e.preventDefault();
 
-    Axios
-      .put(`${API}/user/${user._id}`, formInputs, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
+    Axios.put(`${API}/user/${user._id}`, formInputs, {
+      headers: { Authorization: `Bearer ${storedToken}` },
+    })
       .then((response) => {
         fetchUserInfo();
-        setRender(false)
+        setRender(false);
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -195,14 +227,23 @@ export default function CheckOut({ cartItems }) {
 
   const renderEditFormOnClick = () => {
     setRender(true);
-  }
+  };
   const renderCondition = () => {
-    return currentUser && (Object.keys(currentUser).length < 13 || render === true ? renderForm() : renderAddress())  
-  }
+    return (
+      currentUser &&
+      (Object.keys(currentUser).length < 13 || render === true
+        ? renderForm()
+        : renderAddress())
+    );
+  };
 
   const renderForm = () => {
-    return <div className="add-address">{ <Form template={template} onSubmit={onSubmit}/> }</div>
-  }
+    return (
+      <div className="add-address">
+        {<Form template={template} onSubmit={onSubmit} />}
+      </div>
+    );
+  };
 
   return (
     <div className="checkout-body">
@@ -210,9 +251,11 @@ export default function CheckOut({ cartItems }) {
       <div className="checkout-items">
         <h5>Your Order</h5>
         {renderCartItems()}
-        <div className="checkout-total-price">Total: €{totalPrice},-</div>
-        <button onClick={redirectToCheckout}>Pay</button>
+        <div className="checkout-total-price">Total: € {totalPrice},-</div>
+        <Button variant="warning" onClick={redirectToCheckout}>
+          Pay
+        </Button>
       </div>
     </div>
   );
-};
+}

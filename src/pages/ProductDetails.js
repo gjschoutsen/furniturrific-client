@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import Axios from "axios";
 import { NavLink, useParams, useNavigate } from "react-router-dom";
 import "./css/ProductDetails.css";
-import { Button } from "react-bootstrap";
+import { Button, ButtonGroup } from "react-bootstrap";
 import { AuthContext } from "../context/auth.context";
 
-export default function ProductDetails({fetch, products, addToCart}) {
+export default function ProductDetails({ fetch, products, addToCart }) {
   const { isLoggedIn, isAdmin } = useContext(AuthContext);
   const { productId } = useParams();
   const details = products.find((product) => productId === product._id);
@@ -28,24 +28,42 @@ export default function ProductDetails({fetch, products, addToCart}) {
     <div className="details-page">
       {details && (
         <>
-          <h1>{details.name}</h1>
-          <img src={details.image} alt={details.name} />
-          <h3>€ {details.price},-</h3>
-          <Button onClick={() => addToCart(details) } variant="primary">Add to cart</Button>
-          <p>{details.brand}</p>
-          <p>{details.description}</p>
+          <div className="details-product">
+            <div className="spacer"></div>
+            <div className="details-img">
+              <img src={details.image} alt={details.name} />
+            </div>
+            <div className="details-text">
+              <div className="details-name-price">
+                <h1>{details.name}</h1>
+                <h3>€ {details.price},-</h3>
+              </div>
+              <div className="description-box">
+                <p>{details.description}</p>
+              </div>
+                <Button onClick={() => addToCart(details)} variant="outline-success">
+                  Add to cart
+                </Button>
+              <div className=" details-brand">
+                <h5 >Brand name:</h5>
+                <h5  className="brand-name" >{details.brand}</h5>
+              </div>
+            </div>
+          </div>
           <div>
             {isLoggedIn && isAdmin && (
-              <>
+              <div className="details-buttons-container">
+              <div className="details-buttons">
                 <div>
-                  <NavLink to={`/edit-product/${details._id}`}>
+                  <Button onClick={() => navigate(`/edit-product/${details._id}`)} variant="outline-primary">
                     Edit this product
-                  </NavLink>
+                  </Button>
                 </div>
                 <Button onClick={deleteProduct} variant="outline-danger">
                   Delete this product
                 </Button>{" "}
-              </>
+              </div>
+              </div>
             )}
           </div>
         </>

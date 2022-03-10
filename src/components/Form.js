@@ -10,7 +10,7 @@ import {
 import "./css/Form.css";
 
 export default function Form({ template, onSubmit }) {
-  const { title, fields } = template;
+  const { title, fields, buttonName } = template;
   const [formInputs, setFormInputs] = useState({});
   const { getFormInputs } = useContext(FormContext);
 
@@ -88,8 +88,8 @@ export default function Form({ template, onSubmit }) {
             <h4 className="form-title">{title}</h4>
             {renderFields(fields)}
         <div className="form-button">
-          <Button type="submit" variant="outline-warning">
-            Submit
+          <Button type="submit" variant="warning">
+            {buttonName}
           </Button>
         </div>
           </div>

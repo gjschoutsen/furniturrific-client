@@ -14,6 +14,7 @@ export default function CreateProduct({ fetch }) {
 
   let template = {
     title: "Create new products",
+    buttonName: "Create",
     fields: [
       {
         title: "Name:",

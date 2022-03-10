@@ -11,7 +11,6 @@ export default function NavBar({ cartItems, removeAllCartItems }) {
   const { isLoggedIn, user, isAdmin, logOutUser} =
     useContext(AuthContext);
   const [cartFromStorageState, setCartFromStorageState] = useState([]);
-  // const [amountOfCartItems, setAmountOfCartItems]= useState(0)
 
   useEffect(() => {
     const cartFromStorage = JSON.parse(localStorage.getItem("cart")) ?? [];
@@ -51,10 +50,7 @@ export default function NavBar({ cartItems, removeAllCartItems }) {
               <Nav.Link as={Link} to="/our-story">
                 Our Story
               </Nav.Link>
-              <Nav.Link as={Link} to="/">
-                Home
-              </Nav.Link>
-              <Nav.Link as={Link} to="/cart">
+              <Nav.Link as={Link} to="/cart/1">
                 <img className="nav-image" src={cart} alt="cart" />{" "}
                 {amountOfCartItems}
               </Nav.Link>

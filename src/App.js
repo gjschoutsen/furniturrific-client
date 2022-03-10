@@ -117,7 +117,7 @@ function App() {
               }
             ></Route>
             <Route
-              path="/cart"
+              path="/cart/:num"
               element={
                 <IsPrivate>
                   <ShoppingCart
@@ -171,6 +171,7 @@ function App() {
           </Routes>
         </div>
       </div>
+      <div className="keep-footer-down"></div>
       <div className="is-footer">
         <Footer />
       </div>

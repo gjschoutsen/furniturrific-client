@@ -1,4 +1,5 @@
 .form-container {
+    font-family: 'Mukta', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;

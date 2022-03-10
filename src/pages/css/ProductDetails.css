@@ -1,3 +1,87 @@
 .details-page {
     text-align: center;
+    font-family: 'Mukta', sans-serif;
+}
+
+.details-product {
+    background-color: aliceblue;
+    margin: 0;
+    padding: 0;
+    width: 800px;
+    height: auto;
+    position: absolute;
+    top: 20%;
+    left: calc(50vw - 400px);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: rgba(250, 190, 78, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.spacer {
+    height: 40px;
+}
+
+.details-name-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    gap: 40px
+}
+.details-name-price h3{
+    color: rgb(50, 158, 0);
+    padding: 0;
+    margin: 0;
+}
+
+.details-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.details-buttons-container {
+    width: 800px;
+    position: absolute;
+    left: calc(50vw - 400px);
+}
+
+.details-brand {
+    color: grey;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    align-items: center;
+    margin-top: 80px;
+}
+.details-brand h5 {
+    padding: 0;
+    margin: 0;
+    padding-bottom: 40px;
+}
+.brand-name {
+    font-size: 1.5rem;
+    padding: 0;
+    margin: 0;
+    
+}
+.details-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.description-box {
+    height: 300px;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.description-box p {
+    text-align: left;
+    padding: 20px;
 }

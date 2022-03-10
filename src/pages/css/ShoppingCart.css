@@ -1,0 +1,114 @@
+.shopping-cart {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Mukta', sans-serif;
+}
+
+.sc-product-container {
+    width: 80%;
+    padding: 40px;
+}
+
+.product-box {
+    padding: 40px;
+    position: relative;
+    border: 2px solid orange;
+    margin: 40px;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: rgba(250, 190, 78, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.product-box-img {
+    left: 40px;
+}
+.product-box-img img {
+    max-width: 80%;
+}
+
+.product-box-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all .2s ease-in-out;
+    padding: 0;
+    margin: 0;
+}
+.product-box-btns button {
+    all: unset;
+    font-size: 30px;
+    padding-bottom: 5px;
+}
+
+.product-box-btns button:hover {
+    color: rgb(255, 189, 89);
+    transform: scale(1.1);
+}
+
+.product-box-quantity {
+    text-align: center;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+}
+.remove-btn button{
+    all: unset;
+    font-size: 30px;
+    color: rgb(175, 175, 175);
+}
+
+.product-box-text {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px;
+}
+.product-box-text h3{
+    font-size: 150%;
+}
+.product-box-price {
+    width: 120px;
+    font-size: 100%;
+}
+.fixed-items {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    position: fixed;
+    top: 280px;
+    right: 60px;
+}
+.sc-title {
+    padding-top: 40px;
+}
+
+.empty-cart {
+    position: absolute;
+    top: 200px;
+    left: 30vw;
+    width: 40%;
+    height: 40%;
+    background-color: aliceblue;
+    box-shadow: rgba(250, 190, 78, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.empty-text-box {
+    text-align: center;
+    padding-top: 40px;
+}
+
+.to-the-shop {
+    padding-top: 40px;
+    
+}

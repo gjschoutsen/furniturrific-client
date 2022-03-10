@@ -14,38 +14,8 @@
     
 }
 
-.signup-link {
-    font-size: 0.9vw;
-    color:aliceblue;
-    text-decoration: none;
-    margin-top: 30px;
-    text-align: center;
-}
-
-.side-box2 {
-    all: unset;
-    position: absolute;
-    width: 100%;
-    height:100%;
-    background-color: rgb(91, 195, 243);
-    margin-top: 0px;
-    left: 100%;
-    z-index: 10;
-    transition: all .2s ease-in-out;
-}
 .side-box {
-    all: unset;
-    position: absolute;
-    width: 10%;
-    height: 60%;
-    background-color: rgb(91, 195, 243);
-    margin-top: 60px;
-    left: 25%;
-    z-index: 0;
-    transition: all .2s ease-in-out;
-}
-
-.side-box2:hover {
-    background-color: beige;
-    transform: scale(1.2);
+    text-align: center;
+    margin-top: 40px;
+    text-decoration: none;
 }

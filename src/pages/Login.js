@@ -16,6 +16,7 @@ function LoginPage(props) {
 
   let template = {
     title: "Login",
+    buttonName: "Login",
     fields: [
       {
         title: "Username:",
@@ -56,20 +57,20 @@ function LoginPage(props) {
 
   return (
     <div className="login-body">
-      <Link to={"/signup"}>
-        <div className="side-box">
-          <div className="side-box2">
-            <div className="signup-link">
-              <p>Don't have an account yet?</p>
-              Sign Up
-            </div>
-          </div>
-        </div>
-      </Link>
       <div className="login-page">
         {errorMessage && <p className="error-message">{errorMessage}</p>}
         <Form template={template} onSubmit={onSubmit} />
       </div>
+        <div className="side-box">
+          <div className="side-box2">
+            <div className="signup-link">
+              <p>Don't have an account yet?</p>
+      <Link to={"/signup"}>
+              Sign Up
+      </Link>
+            </div>
+          </div>
+        </div>
     </div>
   );
 }

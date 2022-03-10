@@ -34,6 +34,7 @@ export default function CreateProduct({ fetch, products }) {
 
   let template = {
     title: "Edit your products",
+    buttonName: "Edit",
     fields: [
       {
         title: "Name:",

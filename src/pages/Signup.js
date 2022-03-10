@@ -4,7 +4,6 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FormContext } from "../context/form.context";
 import Axios from "axios";
-import "./css/Signup.css";
 import Form from "../components/Form";
 const API = process.env.REACT_APP_API_URL;
 
@@ -15,6 +14,7 @@ function SignupPage(props) {
 
   let template = {
     title: "Sign Up",
+    buttonName: "Sign Up",
     fields: [
       {
         title: "Email:",
@@ -56,7 +56,7 @@ function SignupPage(props) {
     <div className="signup-page">
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <Form template={template} onSubmit={onSubmit} />
-      <div >
+      <div className="side-box">
         <p>Already have account?</p>
         <Link to={"/login/1"}> Login</Link>
       </div>
