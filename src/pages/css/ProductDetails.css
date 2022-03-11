@@ -22,10 +22,12 @@
 .spacer {
     height: 40px;
 }
+.top-spacer {
+    height: 200px;
+}
 .footer-spacer {
     height: 800px;
 }
-
 .details-name-price {
     display: flex;
     align-items: center;

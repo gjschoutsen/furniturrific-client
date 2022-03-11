@@ -28,6 +28,7 @@ export default function ProductDetails({ fetch, products, addToCart }) {
     <div className="details-page">
       {details && (
         <>
+          
           <div className="details-product">
             <div className="spacer"></div>
             <div className="details-img">
@@ -66,6 +67,7 @@ export default function ProductDetails({ fetch, products, addToCart }) {
               </div>
             )}
           </div>
+          
         </>
       )}
       <div className="footer-spacer"></div>

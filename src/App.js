@@ -22,6 +22,7 @@ import "@stripe/stripe-js"
 import Success from "./pages/Success";
 import Cancel from "./pages/Cancel";
 import Thanks from "./pages/Thanks";
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -93,6 +94,7 @@ function App() {
       <div className="App">
         <div className="not-footer">
           <Navbar cartItems={cartItems} removeAllCartItems={removeAllCartItems} />
+          <ScrollToTop />
           <Routes>
             <Route path="/thankyou" element={<Thanks />}></Route>
             <Route path="/" element={<Home />}></Route>
