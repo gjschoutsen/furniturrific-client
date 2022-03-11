@@ -107,6 +107,7 @@ export default function ShoppingCart({
           )}
         </div>
       </div>
+      <div className="spacer2"></div>
     </div>
   );
 }

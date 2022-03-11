@@ -117,6 +117,7 @@ export default function CheckOut({ cartItems }) {
               <tr></tr>
             </tbody>
           </table>
+          <div className="spacer3"></div>
         </div>
         <div className="address-button">
           <Button onClick={renderEditFormOnClick} variant="outline-info">
@@ -255,6 +256,7 @@ export default function CheckOut({ cartItems }) {
           Pay
         </Button>
       </div>
+      <div className="spacer-bottom-checkout"></div>
     </div>
   );
 }

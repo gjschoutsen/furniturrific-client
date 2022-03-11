@@ -17,6 +17,13 @@
 .checkout-image img{
     width: 30%;
 }
+.spacer3 {
+    height: 60px;
+}
+
+.spacer-bottom-checkout {
+    height: 500px;
+}
 
 .quant-price {
     display: flex;
@@ -58,5 +65,5 @@
     bottom: 20px;
 }
 .checkout-price {
-    width: 50px;
+    width: auto;
 }
